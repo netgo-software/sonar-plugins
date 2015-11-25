@@ -23,12 +23,12 @@ public class UnexpectedAccesCheckTest {
 	@SuppressWarnings("javadoc")
 	@Test
 	public void test_InvokedFromOtherClass() {
-		JavaCheckVerifier.verify("src/junit/de/tolina/sonar/plugins/vft/checks/UnexpectedAccesCheckTestClassCaller.java", check);
+		JavaCheckVerifier.verify("src/test/java/de/tolina/sonar/plugins/vft/checks/UnexpectedAccesCheckTestClassCaller.java", check);
 	}
 
 	@SuppressWarnings("javadoc")
 	@Test
 	public void test_InvokedFromSameClass() {
-		JavaCheckVerifier.verifyNoIssue("src/junit/de/tolina/sonar/plugins/vft/checks/UnexpectedAccesCheckTestClassCallee.java", check);
+		JavaCheckVerifier.verifyNoIssue("src/test/java/de/tolina/sonar/plugins/vft/checks/UnexpectedAccesCheckTestClassCallee.java", check);
 	}
 }
