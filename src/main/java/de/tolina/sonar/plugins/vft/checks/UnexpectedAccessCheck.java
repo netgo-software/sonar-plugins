@@ -25,11 +25,11 @@ import com.google.common.annotations.VisibleForTesting;
  * Only accesses form test code or the same class are legal. 
  * 
  */
-@Rule(key = UnexpectedAccesCheck.RULE_KEY, // 
-name = UnexpectedAccesCheck.RULE_NAME, // 
-description = UnexpectedAccesCheck.RULE_NAME, //
+@Rule(key = UnexpectedAccessCheck.RULE_KEY, // 
+name = UnexpectedAccessCheck.RULE_NAME, // 
+description = UnexpectedAccessCheck.RULE_NAME, //
 tags = { "bad-practice", "design" })
-public class UnexpectedAccesCheck extends BaseTreeVisitor implements JavaFileScanner {
+public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileScanner {
 
 	static final String RULE_KEY = "UnexpectedAccessToVisibleForTesting";
 	static final String RULE_NAME = "You must not access to package-private method or field which is annotated by @VisibleForTesting.";

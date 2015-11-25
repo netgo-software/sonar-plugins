@@ -8,16 +8,16 @@ import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
 
 /**
- * Test: {@link UnexpectedAccesCheck}
+ * Test: {@link UnexpectedAccessCheck}
  */
-public class UnexpectedAccesCheckTest {
+public class UnexpectedAccessCheckTest {
 
-	private UnexpectedAccesCheck check;
+	private UnexpectedAccessCheck check;
 
 	@SuppressWarnings("javadoc")
 	@Before
 	public void initVerifier() {
-		check = new UnexpectedAccesCheck();
+		check = new UnexpectedAccessCheck();
 	}
 
 	@SuppressWarnings("javadoc")
