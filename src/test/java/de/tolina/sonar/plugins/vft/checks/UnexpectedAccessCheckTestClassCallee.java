@@ -5,7 +5,7 @@ package de.tolina.sonar.plugins.vft.checks;
 
 import com.google.common.annotations.VisibleForTesting;
 
-class UnexpectedAccesCheckTestClassCallee {
+class UnexpectedAccessCheckTestClassCallee {
 	//	/** commons-logging Logger für diese Klasse. Per Default auskommentiert */
 	//	private final transient Log log = LogFactory.getLog(this.getClass());
 

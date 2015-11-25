@@ -5,12 +5,12 @@ package de.tolina.sonar.plugins.vft.checks;
 
 import java.util.Objects;
 
-class UnexpectedAccesCheckTestClassCaller {
+class UnexpectedAccessCheckTestClassCaller {
 	//	/** commons-logging Logger für diese Klasse. Per Default auskommentiert */
 	//	private final transient Log log = LogFactory.getLog(this.getClass());
 
 
-	private final UnexpectedAccesCheckTestClassCallee callee = new UnexpectedAccesCheckTestClassCallee();
+	private final UnexpectedAccessCheckTestClassCallee callee = new UnexpectedAccessCheckTestClassCallee();
 
 	void defaultMethodeCaller() {
 		callee.methodeCallee();
