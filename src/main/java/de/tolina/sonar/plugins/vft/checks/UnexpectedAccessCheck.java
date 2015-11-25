@@ -8,12 +8,15 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.semantic.Symbol;
 import org.sonar.plugins.java.api.semantic.SymbolMetadata.AnnotationInstance;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
+import org.sonar.plugins.java.api.tree.MemberSelectExpressionTree;
 import org.sonar.plugins.java.api.tree.MethodInvocationTree;
 import org.sonar.plugins.java.api.tree.MethodTree;
 
@@ -30,6 +33,8 @@ name = UnexpectedAccessCheck.RULE_NAME, //
 description = UnexpectedAccessCheck.RULE_NAME, //
 tags = { "bad-practice", "design" })
 public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileScanner {
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	static final String RULE_KEY = "UnexpectedAccessToVisibleForTesting";
 	static final String RULE_NAME = "You must not access to package-private method or field which is annotated by @VisibleForTesting.";
@@ -71,5 +76,11 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 		super.visitMethodInvocation(methodInvocationTree);
 	}
 
+	@Override
+	public void visitMemberSelectExpression(MemberSelectExpressionTree tree) {
+		String name = tree.identifier().symbol().name();
+		logger.debug("visitMemberSelectExpression invoked. Name of the symbol of identifier: " + name);
+		super.visitMemberSelectExpression(tree);
+	}
 
 }
