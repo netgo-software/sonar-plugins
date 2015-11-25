@@ -14,7 +14,6 @@
 
 	<name>Tolina Sonar Plugins</name>
 	<description>Contains a collecion of Sonar plugins</description>
-	<organization>tolina GmbH</organization>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
