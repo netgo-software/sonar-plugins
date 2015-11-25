@@ -1,0 +1,120 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.tolina</groupId>
+	<artifactId>sonar-plugins</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>sonar-plugin</packaging>
+
+	<scm>
+		<connection>scm:https://github.com/arxes-tolina/sonar-plugins.git</connection>
+		<tag></tag>
+	</scm>
+
+
+	<name>Tolina Sonar Plugins</name>
+	<description>Contains a collecion of Sonar plugins</description>
+	<organization>tolina GmbH</organization>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<sonar.java.plugin.version>3.7.1</sonar.java.plugin.version>
+		<sonar.plugin-api.version>5.1</sonar.plugin-api.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.codehaus.sonar</groupId>
+			<artifactId>sonar-plugin-api</artifactId>
+			<version>${sonar.plugin-api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.sonarsource.java</groupId>
+			<artifactId>sonar-java-plugin</artifactId>
+			<type>sonar-plugin</type>
+			<version>${sonar.java.plugin.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.sonarsource.java</groupId>
+			<artifactId>java-checks-testkit</artifactId>
+			<version>${sonar.java.plugin.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.sonar.sslr</groupId>
+			<artifactId>sslr-testing-harness</artifactId>
+			<version>1.19.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-assert</artifactId>
+			<version>1.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>0.9.30</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+						<compilerArgument>-Xlint:unchecked,deprecation</compilerArgument>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.sonar</groupId>
+				<artifactId>sonar-packaging-maven-plugin</artifactId>
+				<version>1.12.1</version>
+				<extensions>true</extensions>
+				<configuration>
+					<pluginClass>de.tolina.sonar.plugins.TolinaSonarPlugin</pluginClass>
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>${project.build.sourceDirectory}</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
+	</build>
+</project>
