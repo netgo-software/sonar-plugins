@@ -71,7 +71,7 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 		final MethodTree invokingMethod = getInvokingMethod.apply(methodInvocationTree);
 		final boolean isDefault = invokingMethod.symbol().isPackageVisibility();
 		if (!isDefault) {
-			context.addIssue(invokingMethod, this, String.format("You must not access to package-private method or field which is annotated by @VisibleForTesting."));
+			context.addIssue(invokingMethod, this, String.format(RULE_NAME));
 		}
 		super.visitMethodInvocation(methodInvocationTree);
 	}
@@ -79,6 +79,7 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 	@Override
 	public void visitMemberSelectExpression(MemberSelectExpressionTree tree) {
 		String name = tree.identifier().symbol().name();
+
 		logger.debug("visitMemberSelectExpression invoked. Name of the symbol of identifier: " + name);
 		super.visitMemberSelectExpression(tree);
 	}
