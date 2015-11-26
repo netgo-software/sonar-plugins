@@ -58,15 +58,20 @@ public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements J
 		final TypeTree annotationType = annotationTree.annotationType();
 		boolean isVisibleForTesting = annotationType.symbolType().is(COM_GOOGLE_COMMON_ANNOTATIONS_VISIBLE_FOR_TESTING);
 		logger.debug("VisibleForTesting found: " + isVisibleForTesting);
+		if (isVisibleForTesting) {
+			checkVisibleForTesting(annotationTree);
+		}
 
+		super.visitAnnotation(annotationTree);
+	}
+
+	private void checkVisibleForTesting(final AnnotationTree annotationTree) {
 		final Tree treeOfAnnotation = getTreeOfAnnotation.apply(annotationTree);
 		boolean vftAtPackageVisibleTree = isAtPackageVisibleTree.test(treeOfAnnotation);
 
 		if (!vftAtPackageVisibleTree) {
 			context.addIssue(treeOfAnnotation, this, RULE_DESCRIPTION);
 		}
-
-		super.visitAnnotation(annotationTree);
 	}
 
 
@@ -84,7 +89,7 @@ public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements J
 	private static class IsAtPackageVisibleTree implements Predicate<Tree> {
 
 		@Override
-		public boolean test(Tree tree) {
+		public boolean test(final Tree tree) {
 			Optional<Symbol> symbolOptional = Optional.empty();
 
 			if (tree.is(Kind.VARIABLE)) {
