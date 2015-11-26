@@ -60,18 +60,15 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 		final List<AnnotationInstance> annotations = methodInvocationSymbol.metadata().annotations();
 		final Optional<AnnotationInstance> annotationOptional = annotations.stream().filter(isVisibleForTestingAnnotation).findAny();
 
-		if (!annotationOptional.isPresent()) {
-			return;
-		}
+		boolean hasVisibleForTesting = annotationOptional.isPresent();
+		boolean callFromOtheClass = !isCallInsideSameClass.test(methodInvocationTree);
 
-		if (isCallInsideSameClass.test(methodInvocationTree)) {
-			return;
-		}
-
-		final MethodTree invokingMethod = getInvokingMethod.apply(methodInvocationTree);
-		final boolean isDefault = invokingMethod.symbol().isPackageVisibility();
-		if (!isDefault) {
-			context.addIssue(invokingMethod, this, String.format(RULE_NAME));
+		if (hasVisibleForTesting && callFromOtheClass) {
+			final MethodTree invokingMethod = getInvokingMethod.apply(methodInvocationTree);
+			final boolean isDefault = invokingMethod.symbol().isPackageVisibility();
+			if (!isDefault) {
+				context.addIssue(invokingMethod, this, String.format(RULE_NAME));
+			}
 		}
 		super.visitMethodInvocation(methodInvocationTree);
 	}
