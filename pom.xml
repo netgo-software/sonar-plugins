@@ -19,6 +19,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<sonar.java.plugin.version>3.7.1</sonar.java.plugin.version>
 		<sonar.plugin-api.version>5.1</sonar.plugin-api.version>
+		<guava.version>10.0.1</guava.version>
 	</properties>
 
 	<dependencyManagement>
@@ -96,6 +97,8 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+
+
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.sonar</groupId>
@@ -105,6 +108,31 @@
 				<configuration>
 					<pluginClass>de.tolina.sonar.plugins.TolinaSonarPlugin</pluginClass>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.10</version>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>test-compile</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.google.guava</groupId>
+									<artifactId>guava</artifactId>
+									<version>${guava.version}</version>
+									<type>jar</type>
+								</artifactItem>
+							</artifactItems>
+							<outputDirectory>${project.build.directory}/test-jars</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<resources>
@@ -116,4 +144,6 @@
 			</resource>
 		</resources>
 	</build>
+
+
 </project>
