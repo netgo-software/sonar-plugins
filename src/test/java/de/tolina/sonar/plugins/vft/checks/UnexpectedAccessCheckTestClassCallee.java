@@ -3,6 +3,8 @@
  */
 package de.tolina.sonar.plugins.vft.checks;
 
+import java.util.Objects;
+
 import com.google.common.annotations.VisibleForTesting;
 
 class UnexpectedAccessCheckTestClassCallee {
@@ -19,7 +21,11 @@ class UnexpectedAccessCheckTestClassCallee {
 		// NOOP
 	}
 
-	public void legalCallInsideSameClass() {
+	void legalCallInsideSameClass() {
 		methodeCallee();
+	}
+
+	void legalAccesInsideSameClass() {
+		Objects.requireNonNull(visibleForTesting);
 	}
 }
