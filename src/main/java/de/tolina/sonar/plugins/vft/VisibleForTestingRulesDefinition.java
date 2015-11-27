@@ -14,6 +14,7 @@ import org.sonar.plugins.java.api.JavaCheck;
 import com.google.common.annotations.VisibleForTesting;
 
 import de.tolina.sonar.plugins.TolinaSonarPlugin;
+import de.tolina.sonar.plugins.vft.checks.MisuseOfVisibleForTestingCheck;
 import de.tolina.sonar.plugins.vft.checks.UnexpectedAccessCheck;
 
 /**
@@ -37,6 +38,7 @@ public class VisibleForTestingRulesDefinition implements RulesDefinition {
 		final Collection<Class<? extends JavaCheck>> checks = new ArrayList<Class<? extends JavaCheck>>();
 
 		checks.add(UnexpectedAccessCheck.class);
+		checks.add(MisuseOfVisibleForTestingCheck.class);
 
 		return Collections.unmodifiableCollection(checks);
 	}
