@@ -9,6 +9,10 @@ import org.sonar.plugins.java.api.tree.Tree;
 
 import com.google.common.annotations.VisibleForTesting;
 
+/**
+ * {@link Predicate} that answers if an {@link AnnotationTree} is placed at a {@link Symbol}
+ * with "package protected / default" visibility.
+ */
 class IsAnnotationAtPackageVisibleTree implements Predicate<AnnotationTree> {
 	private final Function<Tree, Symbol> getNextParentSymbol;
 
