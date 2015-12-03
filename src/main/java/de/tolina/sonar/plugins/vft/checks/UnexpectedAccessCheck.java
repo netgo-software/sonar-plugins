@@ -3,6 +3,7 @@
  */
 package de.tolina.sonar.plugins.vft.checks;
 
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -67,10 +68,8 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 	}
 
 	private void addIssueIfNeeded(final Symbol symbol, final Tree tree) {
-		boolean hasVisibleForTesting = hasVisibleForTestingPredicate.test(symbol);
-		if (hasVisibleForTesting) {
-			context.addIssue(tree, this, String.format(RULE_NAME));
-		}
+		final Optional<Symbol> symbolWithVisibleForTesting = Optional.ofNullable(symbol).filter(hasVisibleForTestingPredicate);
+		symbolWithVisibleForTesting.ifPresent(s -> context.addIssue(tree, this, String.format(RULE_NAME)));
 	}
 
 }
