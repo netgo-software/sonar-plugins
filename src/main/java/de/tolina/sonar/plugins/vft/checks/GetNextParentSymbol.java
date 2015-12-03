@@ -22,9 +22,9 @@ class GetNextParentSymbol implements Function<Tree, Symbol> {
 	@Override
 	@Nullable
 	public Symbol apply(final @Nullable Tree t) {
-		Optional<Tree> parent = Optional.ofNullable(t).map((tree) -> tree.parent());
+		final Optional<Tree> parent = Optional.ofNullable(t).map((tree) -> tree.parent());
 		if (parent.isPresent()) {
-			Optional<Symbol> symbol = parent.map(getSymbol);
+			final Optional<Symbol> symbol = parent.map(getSymbol);
 			return symbol.orElseGet(() -> apply(parent.get()));
 		}
 		return null;
@@ -32,7 +32,7 @@ class GetNextParentSymbol implements Function<Tree, Symbol> {
 
 
 	/**
-	 * This class is a dirty hack. 
+	 * This class is a dirty hack, but there is no other way to access the semantic api 
 	 *
 	 */
 	private static class GetSymbol implements Function<Tree, Symbol> {

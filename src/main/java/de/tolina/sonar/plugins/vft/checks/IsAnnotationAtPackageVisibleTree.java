@@ -28,7 +28,7 @@ class IsAnnotationAtPackageVisibleTree implements Predicate<AnnotationTree> {
 
 	@Override
 	public boolean test(final AnnotationTree annotationTree) {
-		Symbol symbol = getNextParentSymbol.apply(annotationTree);
+		final Symbol symbol = getNextParentSymbol.apply(annotationTree);
 		if (symbol != null) {
 			return symbol.isPackageVisibility();
 		}
