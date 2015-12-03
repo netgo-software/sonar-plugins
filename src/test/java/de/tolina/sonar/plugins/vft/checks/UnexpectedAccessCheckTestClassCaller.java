@@ -11,32 +11,29 @@ class UnexpectedAccessCheckTestClassCaller {
 
 
 	private static final UnexpectedAccessCheckTestClassCallee staticCallee = new UnexpectedAccessCheckTestClassCallee();
-	static final Object staticObject = staticCallee.visibleForTesting;
+	static final Object staticObject = staticCallee.visibleForTesting; // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
 
 	static {
-		staticCallee.methodeCallee();
+		staticCallee.methodeCallee(); // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
 	}
-
 
 	private final UnexpectedAccessCheckTestClassCallee callee = new UnexpectedAccessCheckTestClassCallee();
 
-
-
 	void defaultMethodeCaller() {
-		callee.methodeCallee();
+		callee.methodeCallee(); // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
 	}
 
 	@SuppressWarnings("unused")
-	private void privateMethodeCaller() { // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
-		callee.methodeCallee();
+	private void privateMethodeCaller() {
+		callee.methodeCallee(); // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
 	}
 
-	public void publicMethodeCaller() { // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
-		callee.methodeCallee();
+	public void publicMethodeCaller() {
+		callee.methodeCallee(); // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
 	}
 
-	protected void protectedMethodeCaller() { // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
-		callee.methodeCallee();
+	protected void protectedMethodeCaller() {
+		callee.methodeCallee(); // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
 	}
 
 

@@ -4,7 +4,6 @@
 package de.tolina.sonar.plugins.vft.checks;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.sonar.java.checks.verifier.JavaCheckVerifier;
 
@@ -23,7 +22,6 @@ public class UnexpectedAccessCheckTest {
 
 	@SuppressWarnings("javadoc")
 	@Test
-	@Ignore
 	public void test_InvokedFromOtherClass() {
 		JavaCheckVerifier.verify("src/test/java/de/tolina/sonar/plugins/vft/checks/UnexpectedAccessCheckTestClassCaller.java", check);
 	}

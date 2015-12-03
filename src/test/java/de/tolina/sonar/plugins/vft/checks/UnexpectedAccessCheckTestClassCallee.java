@@ -13,8 +13,14 @@ class UnexpectedAccessCheckTestClassCallee {
 
 	@VisibleForTesting
 	Object visibleForTesting = new Object();
+	static Object staticVisibleForTesting = new Object();
 
 	Object visibleForAll = new Object();
+
+	static {
+		Objects.requireNonNull(staticVisibleForTesting);
+	}
+
 
 	@VisibleForTesting
 	void methodeCallee() {

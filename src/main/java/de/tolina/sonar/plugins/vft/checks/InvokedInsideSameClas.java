@@ -9,10 +9,12 @@ import java.util.function.Predicate;
 
 import org.sonar.plugins.java.api.semantic.Symbol;
 import org.sonar.plugins.java.api.tree.MethodInvocationTree;
+import org.sonar.plugins.java.api.tree.Tree;
 
+@Deprecated
 final class InvokedInsideSameClas implements Predicate<MethodInvocationTree> {
 
-	private final Function<MethodInvocationTree, Symbol> getCallingMethod = new GetInvokingSymbol();
+	private final Function<Tree, Symbol> getCallingMethod = new GetAccessingSymbol();
 
 
 	@Override

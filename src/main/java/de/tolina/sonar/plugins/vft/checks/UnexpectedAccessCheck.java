@@ -3,9 +3,6 @@
  */
 package de.tolina.sonar.plugins.vft.checks;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.slf4j.Logger;
@@ -14,10 +11,8 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.semantic.Symbol;
-import org.sonar.plugins.java.api.semantic.SymbolMetadata.AnnotationInstance;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.java.api.tree.MemberSelectExpressionTree;
-import org.sonar.plugins.java.api.tree.MethodInvocationTree;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -43,9 +38,9 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 
 	private JavaFileScannerContext context;
 
-	private final Predicate<AnnotationInstance> isVisibleForTestingAnnotation = new IsVisibleForTesting();
-	private final Function<MethodInvocationTree, Symbol> getInvokingMethod = new GetInvokingSymbol();
-	private final Predicate<MethodInvocationTree> isCallInsideSameClass = new InvokedInsideSameClas();
+
+	//private final Function<Tree, Symbol> getAccesingSymbol = new GetAccessingSymbol();
+	private final Predicate<Symbol> hasVisibleForTestingPredicate = new HasVisibleForTestingPredicate();
 
 	@Override
 	public void scanFile(final JavaFileScannerContext ctx) {
@@ -53,31 +48,25 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 		scan(ctx.getTree());
 	}
 
-	@Override
-	public void visitMethodInvocation(final MethodInvocationTree methodInvocationTree) {
-		final Symbol methodInvocationSymbol = methodInvocationTree.symbol();
-		final List<AnnotationInstance> annotations = methodInvocationSymbol.metadata().annotations();
-		final Optional<AnnotationInstance> annotationOptional = annotations.stream().filter(isVisibleForTestingAnnotation).findAny();
 
-		boolean hasVisibleForTesting = annotationOptional.isPresent();
-		boolean callFromOtheClass = !isCallInsideSameClass.test(methodInvocationTree);
-
-		if (hasVisibleForTesting && callFromOtheClass) {
-			final Symbol invokingMethod = getInvokingMethod.apply(methodInvocationTree);
-			final boolean isDefault = invokingMethod.isPackageVisibility();
-			if (!isDefault) {
-				context.addIssue(invokingMethod.declaration(), this, String.format(RULE_NAME));
-			}
-		}
-		super.visitMethodInvocation(methodInvocationTree);
-	}
 
 	@Override
 	public void visitMemberSelectExpression(MemberSelectExpressionTree tree) {
-		String name = tree.identifier().symbol().name();
+		Symbol selectedMemberSymbol = tree.identifier().symbol();
 
-		logger.debug("visitMemberSelectExpression invoked. Name of the symbol of identifier: " + name);
+		boolean hasVisibleForTesting = hasVisibleForTestingPredicate.test(selectedMemberSymbol);
+
+		String selectedMemberName = selectedMemberSymbol.name();
+		//		Optional<Symbol> accessingSymbolOptional = Optional.of(tree).map(getAccesingSymbol);
+		//		String accessingSymbolName = accessingSymbolOptional.map(symbol -> symbol.name()).//
+		//				orElse("No symbol");
+
+		if (hasVisibleForTesting) {
+			//			if (hasVisibleForTesting && accessingSymbolOptional.isPresent()) {
+			context.addIssue(tree, this, String.format(RULE_NAME));
+		}
+		logger.debug("visitMemberSelectExpression invoked. Name of the symbol of identifier: " + selectedMemberName);
+		//		logger.debug("visitMemberSelectExpression invoked. Name of the symbol of accesing symbol: " + accessingSymbolName);
 		super.visitMemberSelectExpression(tree);
 	}
-
 }
