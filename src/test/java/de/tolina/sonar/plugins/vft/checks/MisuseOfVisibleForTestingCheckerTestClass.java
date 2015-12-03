@@ -9,15 +9,15 @@ class MisuseOfVisibleForTestingCheckerTestClass {
 	//	/** commons-logging Logger für diese Klasse. Per Default auskommentiert */
 	//	private final transient Log log = LogFactory.getLog(this.getClass());
 
-	@VisibleForTesting
-	private Object privateObject = new Object(); // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
+	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
+	private Object privateObject = new Object();
 	@VisibleForTesting
 	Object defaultObject = new Object();
-	@VisibleForTesting
-	public Object publicObject = new Object(); // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
+	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}} 
+	public Object publicObject = new Object();
 
-	@VisibleForTesting
-	private void privateMethod() { // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
+	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
+	private void privateMethod() {
 		// NOOP
 	}
 
@@ -26,8 +26,8 @@ class MisuseOfVisibleForTestingCheckerTestClass {
 		// NOOP
 	}
 
-	@VisibleForTesting
-	public void publicMethod() { // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
+	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
+	public void publicMethod() {
 		// NOOP
 	}
 }

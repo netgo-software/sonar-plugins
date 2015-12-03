@@ -1,9 +1,8 @@
 package de.tolina.sonar.plugins.vft;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 import org.sonar.plugins.java.api.CheckRegistrar;
-import org.sonar.plugins.java.api.JavaCheck;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -14,12 +13,6 @@ public class VisibleForTestingCheckRegistrar implements CheckRegistrar {
 
 	@Override
 	public void register(RegistrarContext registrarContext) {
-		registrarContext.registerClassesForRepository(DefaultChecks.REPOSITORY_KEY, DefaultChecks.getChecks(), Arrays.asList(testCheckClasses()));
-	}
-
-
-	@SuppressWarnings("unchecked")
-	private Class<? extends JavaCheck>[] testCheckClasses() {
-		return new Class[] {};
+		registrarContext.registerClassesForRepository(DefaultChecks.REPOSITORY_KEY, DefaultChecks.getChecks(), Collections.emptyList());
 	}
 }

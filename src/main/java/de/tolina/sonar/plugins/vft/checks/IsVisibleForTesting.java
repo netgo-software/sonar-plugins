@@ -26,7 +26,7 @@ class IsVisibleForTesting implements Predicate<AnnotationInstance> {
 	}
 
 
-	static class IsAnAnnotation implements Predicate<AnnotationInstance> {
+	private static class IsAnAnnotation implements Predicate<AnnotationInstance> {
 
 		private final Logger logger = LoggerFactory.getLogger(IsAnAnnotation.class);
 

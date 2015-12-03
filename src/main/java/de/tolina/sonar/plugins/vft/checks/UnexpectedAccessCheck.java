@@ -16,6 +16,8 @@ import org.sonar.plugins.java.api.tree.MemberSelectExpressionTree;
 
 import com.google.common.annotations.VisibleForTesting;
 
+import de.tolina.sonar.plugins.Tags;
+
 
 /**
  * Checks accessing fields and methods marked as {@link VisibleForTesting}.
@@ -25,7 +27,7 @@ import com.google.common.annotations.VisibleForTesting;
 @Rule(key = UnexpectedAccessCheck.RULE_KEY, // 
 name = UnexpectedAccessCheck.RULE_NAME, // 
 description = UnexpectedAccessCheck.RULE_NAME, //
-tags = { "bad-practice", "design" })
+tags = { Tags.BAD_PRACTICE, Tags.DESIGN })
 public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileScanner {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
