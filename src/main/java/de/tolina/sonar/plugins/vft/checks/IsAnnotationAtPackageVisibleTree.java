@@ -5,40 +5,29 @@ import java.util.function.Predicate;
 
 import org.sonar.plugins.java.api.semantic.Symbol;
 import org.sonar.plugins.java.api.tree.AnnotationTree;
-import org.sonar.plugins.java.api.tree.MethodTree;
-import org.sonar.plugins.java.api.tree.ModifiersTree;
 import org.sonar.plugins.java.api.tree.Tree;
-import org.sonar.plugins.java.api.tree.Tree.Kind;
-import org.sonar.plugins.java.api.tree.VariableTree;
+
+import com.google.common.annotations.VisibleForTesting;
 
 class IsAnnotationAtPackageVisibleTree implements Predicate<AnnotationTree> {
-	private final Function<AnnotationTree, Tree> getTreeOfAnnotation = new GetTreeOfAnnotation();
+	private final Function<Tree, Symbol> getNextParentSymbol;
+
+	@VisibleForTesting
+	IsAnnotationAtPackageVisibleTree(final Function<Tree, Symbol> getNextParentSymbol) {
+		this.getNextParentSymbol = getNextParentSymbol;
+	}
+
+	IsAnnotationAtPackageVisibleTree() {
+		this(new GetNextParentSymbol());
+	}
+
 
 	@Override
 	public boolean test(final AnnotationTree annotationTree) {
-		Symbol symbol = null;
-		final Tree treeOfAnnotation = getTreeOfAnnotation.apply(annotationTree);
-		if (treeOfAnnotation.is(Kind.VARIABLE)) {
-			VariableTree parentVariableTree = (VariableTree) treeOfAnnotation;
-			symbol = parentVariableTree.symbol();
-		}
-		if (treeOfAnnotation.is(Kind.METHOD)) {
-			MethodTree parentMethodTree = (MethodTree) treeOfAnnotation;
-			symbol = parentMethodTree.symbol();
-		}
+		Symbol symbol = getNextParentSymbol.apply(annotationTree);
 		if (symbol != null) {
 			return symbol.isPackageVisibility();
 		}
 		return false;
-	}
-
-	private static class GetTreeOfAnnotation implements Function<AnnotationTree, Tree> {
-		@Override
-		public Tree apply(final AnnotationTree annotationTree) {
-			final ModifiersTree parentModifiersTree = (ModifiersTree) annotationTree.parent();
-			final Tree parentTree = parentModifiersTree.parent();
-			return parentTree;
-		}
-
 	}
 }
