@@ -16,6 +16,25 @@ class MisuseOfVisibleForTestingCheckerTestClass {
 	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}} 
 	public Object publicObject = new Object();
 
+	@VisibleForTesting
+	MisuseOfVisibleForTestingCheckerTestClass() {
+
+	}
+
+	@SuppressWarnings("unused")
+	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
+	private MisuseOfVisibleForTestingCheckerTestClass(Object obj) {
+		// NOOP
+	}
+
+	@SuppressWarnings("unused")
+	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
+	public MisuseOfVisibleForTestingCheckerTestClass(Object obj1, Object obj2) {
+		// NOOP
+	}
+
+
+
 	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
 	private void privateMethod() {
 		// NOOP
@@ -28,6 +47,22 @@ class MisuseOfVisibleForTestingCheckerTestClass {
 
 	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
 	public void publicMethod() {
+		// NOOP
+	}
+
+	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
+	private static class PrivateClass {
+		// NOOP
+	}
+
+
+	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
+	public static class PublicClass {
+		// NOOP
+	}
+
+	@VisibleForTesting
+	static class DefaultClass {
 		// NOOP
 	}
 }
