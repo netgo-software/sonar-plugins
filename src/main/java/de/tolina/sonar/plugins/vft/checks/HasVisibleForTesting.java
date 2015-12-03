@@ -10,16 +10,16 @@ import org.sonar.plugins.java.api.semantic.SymbolMetadata.AnnotationInstance;
 
 import com.google.common.annotations.VisibleForTesting;
 
-class HasVisibleForTestingPredicate implements Predicate<Symbol> {
+class HasVisibleForTesting implements Predicate<Symbol> {
 	private final Predicate<AnnotationInstance> isVisibleForTestingAnnotation;
 
 
-	HasVisibleForTestingPredicate() {
+	HasVisibleForTesting() {
 		this(new IsVisibleForTesting());
 	}
 
 	@VisibleForTesting
-	HasVisibleForTestingPredicate(final Predicate<AnnotationInstance> isVisibleForTestingAnnotation) {
+	HasVisibleForTesting(final Predicate<AnnotationInstance> isVisibleForTestingAnnotation) {
 		this.isVisibleForTestingAnnotation = isVisibleForTestingAnnotation;
 	}
 

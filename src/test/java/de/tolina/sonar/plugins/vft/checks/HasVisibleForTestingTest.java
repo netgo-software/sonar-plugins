@@ -20,7 +20,7 @@ import org.sonar.plugins.java.api.semantic.SymbolMetadata.AnnotationInstance;
 
 @SuppressWarnings("javadoc")
 @RunWith(MockitoJUnitRunner.class)
-public class HasVisibleForTestingPredicateTest {
+public class HasVisibleForTestingTest {
 
 	private Predicate<Symbol> hasVisibleForTestingPredicate;
 
@@ -33,7 +33,7 @@ public class HasVisibleForTestingPredicateTest {
 
 	@Before
 	public void initTestObject() {
-		hasVisibleForTestingPredicate = new HasVisibleForTestingPredicate(isVisibleForTestingAnnotation);
+		hasVisibleForTestingPredicate = new HasVisibleForTesting(isVisibleForTestingAnnotation);
 	}
 
 	@Before

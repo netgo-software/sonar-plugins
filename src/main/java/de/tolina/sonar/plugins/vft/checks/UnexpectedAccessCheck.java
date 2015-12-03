@@ -40,7 +40,7 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 
 	private JavaFileScannerContext context;
 
-	private final Predicate<Symbol> hasVisibleForTestingPredicate = new HasVisibleForTestingPredicate();
+	private final Predicate<Symbol> hasVisibleForTestingPredicate = new HasVisibleForTesting();
 
 	@Override
 	public void scanFile(final JavaFileScannerContext ctx) {
