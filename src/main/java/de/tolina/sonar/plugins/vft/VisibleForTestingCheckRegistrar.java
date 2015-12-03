@@ -18,7 +18,8 @@ public class VisibleForTestingCheckRegistrar implements CheckRegistrar {
 	}
 
 
-	Class<? extends JavaCheck>[] testCheckClasses() {
+	@SuppressWarnings("unchecked")
+	private Class<? extends JavaCheck>[] testCheckClasses() {
 		return new Class[] {};
 	}
 }
