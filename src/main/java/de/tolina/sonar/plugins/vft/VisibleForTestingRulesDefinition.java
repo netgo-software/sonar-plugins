@@ -17,11 +17,12 @@ import de.tolina.sonar.plugins.TolinaSonarPlugin;
  */
 public class VisibleForTestingRulesDefinition implements RulesDefinition {
 
+	private static final String VISIBLE_FOR_TESTING = "VisibleForTesting";
 
 	@Override
 	public void define(Context context) {
 		final NewRepository repository = context.createRepository(DefaultChecks.REPOSITORY_KEY, TolinaSonarPlugin.JAVA_LANG);
-		repository.setName("VisibleForTesting");
+		repository.setName(VISIBLE_FOR_TESTING);
 		final RulesDefinitionAnnotationLoader annotationLoader = new RulesDefinitionAnnotationLoader();
 
 		final Class<?>[] classArray = DefaultChecks.getChecksAsArray();
