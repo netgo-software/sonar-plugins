@@ -2,6 +2,7 @@ package de.tolina.sonar.plugins.vft.checks;
 
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
@@ -16,12 +17,14 @@ class GetNextParentSymbol implements Function<Tree, Symbol> {
 	@Override
 	@Nullable
 	public Symbol apply(final @Nullable Tree t) {
-		final Optional<Tree> parent = Optional.ofNullable(t).map((tree) -> tree.parent());
-		if (parent.isPresent()) {
-			final Optional<Symbol> symbol = parent.map(getSymbol);
-			return symbol.orElse(apply(parent.get())); // recursive call
+		final Optional<Tree> treeNullable = Optional.ofNullable(t);
+		if (!treeNullable.isPresent()) {
+			return null;
 		}
-		return null;
+		final Optional<Tree> parent = treeNullable.map((tree) -> tree.parent());
+		final Optional<Symbol> symbol = parent.map(getSymbol);
+		final Supplier<Symbol> getFromParent = () -> (apply(parent.orElse(null)));
+		return symbol.orElseGet(getFromParent);
 	}
 }
 
