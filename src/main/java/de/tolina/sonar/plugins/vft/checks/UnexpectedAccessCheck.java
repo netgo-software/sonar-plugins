@@ -38,8 +38,6 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 
 	private JavaFileScannerContext context;
 
-
-	//private final Function<Tree, Symbol> getAccesingSymbol = new GetAccessingSymbol();
 	private final Predicate<Symbol> hasVisibleForTestingPredicate = new HasVisibleForTestingPredicate();
 
 	@Override
@@ -51,22 +49,13 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 
 
 	@Override
-	public void visitMemberSelectExpression(MemberSelectExpressionTree tree) {
-		Symbol selectedMemberSymbol = tree.identifier().symbol();
-
+	public void visitMemberSelectExpression(final MemberSelectExpressionTree tree) {
+		final Symbol selectedMemberSymbol = tree.identifier().symbol();
 		boolean hasVisibleForTesting = hasVisibleForTestingPredicate.test(selectedMemberSymbol);
-
-		String selectedMemberName = selectedMemberSymbol.name();
-		//		Optional<Symbol> accessingSymbolOptional = Optional.of(tree).map(getAccesingSymbol);
-		//		String accessingSymbolName = accessingSymbolOptional.map(symbol -> symbol.name()).//
-		//				orElse("No symbol");
-
 		if (hasVisibleForTesting) {
-			//			if (hasVisibleForTesting && accessingSymbolOptional.isPresent()) {
+			logger.debug("Issue at: " + selectedMemberSymbol.name());
 			context.addIssue(tree, this, String.format(RULE_NAME));
 		}
-		logger.debug("visitMemberSelectExpression invoked. Name of the symbol of identifier: " + selectedMemberName);
-		//		logger.debug("visitMemberSelectExpression invoked. Name of the symbol of accesing symbol: " + accessingSymbolName);
 		super.visitMemberSelectExpression(tree);
 	}
 }
