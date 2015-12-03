@@ -3,6 +3,7 @@
  */
 package de.tolina.sonar.plugins.vft.checks;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.slf4j.Logger;
@@ -53,11 +54,8 @@ public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements J
 		boolean isVisibleForTesting = annotationType.symbolType().is(VISIBLE_FOR_TESTING);
 		if (isVisibleForTesting) {
 			logger.debug("VisibleForTesting found");
-			boolean vftAtPackageVisibleTree = isAtPackageVisibleTree.test(annotationTree);
-
-			if (!vftAtPackageVisibleTree) {
-				context.addIssue(annotationTree, this, RULE_DESCRIPTION);
-			}
+			final Optional<AnnotationTree> vftAtNotPackageProtected = Optional.of(annotationTree).filter(isAtPackageVisibleTree.negate());
+			vftAtNotPackageProtected.ifPresent((tree) -> context.addIssue(tree, this, RULE_DESCRIPTION));
 		}
 		super.visitAnnotation(annotationTree);
 	}
