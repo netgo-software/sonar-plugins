@@ -4,50 +4,40 @@
 package de.tolina.sonar.plugins.vft.checks;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Predicate;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.annotation.Nullable;
+
 import org.sonar.plugins.java.api.semantic.SymbolMetadata.AnnotationInstance;
+
+import com.google.common.annotations.VisibleForTesting;
 
 class IsVisibleForTesting implements Predicate<AnnotationInstance> {
 	//	/** commons-logging Logger für diese Klasse. Per Default auskommentiert */
 	//	private final transient Log log = LogFactory.getLog(this.getClass());
 
 
-	private final String ANNOTAION_PACKAGE = "com.google.common.annotations";
-	private final String ANNOTAION_NAME = "VisibleForTesting";
+	@VisibleForTesting
+	final static String ANNOTAION_PACKAGE = "com.google.common.annotations";
+	@VisibleForTesting
+	final static String ANNOTAION_CLASS = "VisibleForTesting";
 
-	private final Predicate<AnnotationInstance> isVisibleForTestingAnnotation = new IsAnAnnotation(ANNOTAION_PACKAGE, ANNOTAION_NAME);
 
 	@Override
-	public boolean test(final AnnotationInstance t) {
-		return isVisibleForTestingAnnotation.test(t);
+	public boolean test(final @Nullable AnnotationInstance annotationInstance) {
+		final Optional<String> annotationClass = Optional.ofNullable(annotationInstance).//
+				map(ai -> ai.symbol()).//
+				map(symbol -> symbol.name());
+		final Optional<String> annotationPackage = Optional.ofNullable(annotationInstance).//
+				map(ai -> ai.symbol()).//
+				map(symbol -> symbol.owner()).//
+				map(owner -> owner.name());
+
+		boolean samePackage = Objects.equals(ANNOTAION_PACKAGE, annotationPackage.orElse(null));
+		boolean sameClass = Objects.equals(ANNOTAION_CLASS, annotationClass.orElse(null));
+
+		return sameClass && samePackage;
 	}
 
-
-	private static class IsAnAnnotation implements Predicate<AnnotationInstance> {
-
-		private final Logger logger = LoggerFactory.getLogger(IsAnAnnotation.class);
-
-		private final String packageName;
-		private final String className;
-
-		IsAnAnnotation(final String packageName, final String className) {
-			this.packageName = packageName;
-			this.className = className;
-		}
-
-		@Override
-		public boolean test(final AnnotationInstance annotationInstance) {
-			final String annotationName = annotationInstance.symbol().name();
-			final String annotationPackage = annotationInstance.symbol().owner().name();
-			logger.debug("Checking Annotation. Expected [" + packageName + "." + className + "] got [" + // 
-					annotationPackage + "." + annotationName + "]");
-
-			boolean sameAnnotation = Objects.equals(className, annotationName);
-			boolean samePackage = Objects.equals(packageName, annotationPackage);
-			return sameAnnotation && samePackage;
-		}
-	}
 }
