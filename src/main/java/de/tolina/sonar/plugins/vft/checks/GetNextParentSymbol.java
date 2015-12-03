@@ -19,7 +19,7 @@ class GetNextParentSymbol implements Function<Tree, Symbol> {
 		final Optional<Tree> parent = Optional.ofNullable(t).map((tree) -> tree.parent());
 		if (parent.isPresent()) {
 			final Optional<Symbol> symbol = parent.map(getSymbol);
-			return symbol.orElseGet(() -> apply(parent.get()));
+			return symbol.orElse(apply(parent.get())); // recursive call
 		}
 		return null;
 	}
