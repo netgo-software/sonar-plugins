@@ -18,7 +18,6 @@ import org.sonar.plugins.java.api.semantic.SymbolMetadata.AnnotationInstance;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.java.api.tree.MemberSelectExpressionTree;
 import org.sonar.plugins.java.api.tree.MethodInvocationTree;
-import org.sonar.plugins.java.api.tree.MethodTree;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -45,7 +44,7 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 	private JavaFileScannerContext context;
 
 	private final Predicate<AnnotationInstance> isVisibleForTestingAnnotation = new IsVisibleForTesting();
-	private final Function<MethodInvocationTree, MethodTree> getInvokingMethod = new GetInvokingMethod();
+	private final Function<MethodInvocationTree, Symbol> getInvokingMethod = new GetInvokingSymbol();
 	private final Predicate<MethodInvocationTree> isCallInsideSameClass = new InvokedInsideSameClas();
 
 	@Override
@@ -64,10 +63,10 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 		boolean callFromOtheClass = !isCallInsideSameClass.test(methodInvocationTree);
 
 		if (hasVisibleForTesting && callFromOtheClass) {
-			final MethodTree invokingMethod = getInvokingMethod.apply(methodInvocationTree);
-			final boolean isDefault = invokingMethod.symbol().isPackageVisibility();
+			final Symbol invokingMethod = getInvokingMethod.apply(methodInvocationTree);
+			final boolean isDefault = invokingMethod.isPackageVisibility();
 			if (!isDefault) {
-				context.addIssue(invokingMethod, this, String.format(RULE_NAME));
+				context.addIssue(invokingMethod.declaration(), this, String.format(RULE_NAME));
 			}
 		}
 		super.visitMethodInvocation(methodInvocationTree);

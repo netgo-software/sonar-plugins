@@ -10,7 +10,17 @@ class UnexpectedAccessCheckTestClassCaller {
 	//	private final transient Log log = LogFactory.getLog(this.getClass());
 
 
+	private static final UnexpectedAccessCheckTestClassCallee staticCallee = new UnexpectedAccessCheckTestClassCallee();
+	static final Object staticObject = staticCallee.visibleForTesting;
+
+	static {
+		staticCallee.methodeCallee();
+	}
+
+
 	private final UnexpectedAccessCheckTestClassCallee callee = new UnexpectedAccessCheckTestClassCallee();
+
+
 
 	void defaultMethodeCaller() {
 		callee.methodeCallee();

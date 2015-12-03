@@ -9,19 +9,20 @@ import java.util.function.Predicate;
 
 import org.sonar.plugins.java.api.semantic.Symbol;
 import org.sonar.plugins.java.api.tree.MethodInvocationTree;
-import org.sonar.plugins.java.api.tree.MethodTree;
 
 final class InvokedInsideSameClas implements Predicate<MethodInvocationTree> {
 
-	private final Function<MethodInvocationTree, MethodTree> getCallingMethod = new GetInvokingMethod();
+	private final Function<MethodInvocationTree, Symbol> getCallingMethod = new GetInvokingSymbol();
+
 
 	@Override
 	public boolean test(final MethodInvocationTree invokedMethod) {
 		final Symbol invokedMethodOwnerClass = invokedMethod.symbol().owner();
 		final Symbol invokedMethodOwnerPackage = invokedMethodOwnerClass.owner();
 
-		final MethodTree invokingMethod = getCallingMethod.apply(invokedMethod);
-		final Symbol invokingMethodOwnerClass = invokingMethod.symbol().owner();
+
+		final Symbol invokingMethod = getCallingMethod.apply(invokedMethod);
+		final Symbol invokingMethodOwnerClass = invokingMethod.owner();
 		final Symbol invokingMethodOwnerPackage = invokingMethodOwnerClass.owner();
 
 		boolean sameClass = Objects.equals(invokingMethodOwnerClass, invokedMethodOwnerClass);

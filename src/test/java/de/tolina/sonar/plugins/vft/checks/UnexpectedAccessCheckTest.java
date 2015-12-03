@@ -23,7 +23,7 @@ public class UnexpectedAccessCheckTest {
 
 	@SuppressWarnings("javadoc")
 	@Test
-	@Ignore("The detection of access to VisibleForTesting at fields does not work.")
+	@Ignore
 	public void test_InvokedFromOtherClass() {
 		JavaCheckVerifier.verify("src/test/java/de/tolina/sonar/plugins/vft/checks/UnexpectedAccessCheckTestClassCaller.java", check);
 	}
