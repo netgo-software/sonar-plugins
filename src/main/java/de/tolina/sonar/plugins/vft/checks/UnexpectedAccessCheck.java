@@ -3,16 +3,17 @@
  */
 package de.tolina.sonar.plugins.vft.checks;
 
+import java.util.function.Function;
 import java.util.function.Predicate;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.semantic.Symbol;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.java.api.tree.MemberSelectExpressionTree;
+import org.sonar.plugins.java.api.tree.NewClassTree;
+import org.sonar.plugins.java.api.tree.Tree;
 
 import com.google.common.annotations.VisibleForTesting;
 
@@ -30,7 +31,7 @@ description = UnexpectedAccessCheck.RULE_NAME, //
 tags = { Tags.BAD_PRACTICE, Tags.DESIGN })
 public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileScanner {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	//private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	static final String RULE_KEY = "UnexpectedAccessToVisibleForTesting";
 	static final String RULE_NAME = "You must not access to package-private method or field which is annotated by @VisibleForTesting.";
@@ -41,6 +42,7 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 	private JavaFileScannerContext context;
 
 	private final Predicate<Symbol> hasVisibleForTestingPredicate = new HasVisibleForTesting();
+	private Function<Tree, Symbol> getSymbol = new GetSymbol();
 
 	@Override
 	public void scanFile(final JavaFileScannerContext ctx) {
@@ -49,15 +51,26 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 	}
 
 
+	@Override
+	public void visitNewClass(NewClassTree tree) {
+		final Symbol symbol = getSymbol.apply(tree);
+		addIssueIfNeeded(symbol, tree);
+		super.visitNewClass(tree);
+	}
+
 
 	@Override
 	public void visitMemberSelectExpression(final MemberSelectExpressionTree tree) {
-		final Symbol selectedMemberSymbol = tree.identifier().symbol();
-		boolean hasVisibleForTesting = hasVisibleForTestingPredicate.test(selectedMemberSymbol);
-		if (hasVisibleForTesting) {
-			logger.debug("Issue at: " + selectedMemberSymbol.name());
-			context.addIssue(tree, this, String.format(RULE_NAME));
-		}
+		final Symbol symbol = tree.identifier().symbol();
+		addIssueIfNeeded(symbol, tree);
 		super.visitMemberSelectExpression(tree);
 	}
+
+	private void addIssueIfNeeded(final Symbol symbol, final Tree tree) {
+		boolean hasVisibleForTesting = hasVisibleForTestingPredicate.test(symbol);
+		if (hasVisibleForTesting) {
+			context.addIssue(tree, this, String.format(RULE_NAME));
+		}
+	}
+
 }

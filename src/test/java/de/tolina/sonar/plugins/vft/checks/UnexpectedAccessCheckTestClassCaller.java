@@ -10,14 +10,14 @@ class UnexpectedAccessCheckTestClassCaller {
 	//	private final transient Log log = LogFactory.getLog(this.getClass());
 
 
-	private static final UnexpectedAccessCheckTestClassCallee staticCallee = new UnexpectedAccessCheckTestClassCallee();
+	private static final UnexpectedAccessCheckTestClassCallee staticCallee = new UnexpectedAccessCheckTestClassCallee(); // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
 	static final Object staticObject = staticCallee.visibleForTesting; // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
 
 	static {
 		staticCallee.methodeCallee(); // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
 	}
 
-	private final UnexpectedAccessCheckTestClassCallee callee = new UnexpectedAccessCheckTestClassCallee();
+	private final UnexpectedAccessCheckTestClassCallee callee = new UnexpectedAccessCheckTestClassCallee(new Object());// Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
 
 	void defaultMethodeCaller() {
 		callee.methodeCallee(); // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}

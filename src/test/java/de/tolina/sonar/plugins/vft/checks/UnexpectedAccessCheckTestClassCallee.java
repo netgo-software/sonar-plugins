@@ -21,6 +21,15 @@ class UnexpectedAccessCheckTestClassCallee {
 		Objects.requireNonNull(staticVisibleForTesting);
 	}
 
+	@VisibleForTesting
+	UnexpectedAccessCheckTestClassCallee() {
+
+	}
+
+	@VisibleForTesting
+	UnexpectedAccessCheckTestClassCallee(@SuppressWarnings("unused") Object o) {
+		// NOOP
+	}
 
 	@VisibleForTesting
 	void methodeCallee() {
