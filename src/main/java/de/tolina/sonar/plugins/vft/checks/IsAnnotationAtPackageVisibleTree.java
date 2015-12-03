@@ -1,5 +1,6 @@
 package de.tolina.sonar.plugins.vft.checks;
 
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -28,10 +29,9 @@ class IsAnnotationAtPackageVisibleTree implements Predicate<AnnotationTree> {
 
 	@Override
 	public boolean test(final AnnotationTree annotationTree) {
-		final Symbol symbol = getNextParentSymbol.apply(annotationTree);
-		if (symbol != null) {
-			return symbol.isPackageVisibility();
-		}
-		return false;
+		final Optional<Symbol> symbol = Optional.ofNullable(annotationTree).map(getNextParentSymbol);
+		final Boolean isAtPackageVisibleTree = symbol.map(s -> Boolean.valueOf(s.isPackageVisibility())).//
+				orElse(Boolean.FALSE);
+		return isAtPackageVisibleTree.booleanValue();
 	}
 }
