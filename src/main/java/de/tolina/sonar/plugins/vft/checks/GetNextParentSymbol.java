@@ -16,7 +16,7 @@ import org.sonar.plugins.java.api.tree.Tree;
  */
 class GetNextParentSymbol implements Function<Tree, Symbol> {
 	//	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	private Function<Tree, Symbol> getSymbol = new GetSymbol();
+	private final Function<Tree, Symbol> getSymbol = new GetSymbol();
 
 
 	@Override

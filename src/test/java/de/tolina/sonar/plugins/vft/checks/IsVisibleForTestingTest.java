@@ -34,7 +34,7 @@ public class IsVisibleForTestingTest {
 	@Before
 	public void initMocks() {
 		when(annotatioInstance.symbol()).thenReturn(symbol);
-		when(annotatioInstance.symbol().owner()).thenReturn(owner);
+		when(symbol.owner()).thenReturn(owner);
 	}
 
 	@Test
