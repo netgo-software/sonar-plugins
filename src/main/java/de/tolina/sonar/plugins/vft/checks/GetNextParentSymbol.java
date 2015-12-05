@@ -9,6 +9,11 @@ import javax.annotation.Nullable;
 import org.sonar.plugins.java.api.semantic.Symbol;
 import org.sonar.plugins.java.api.tree.Tree;
 
+/**
+ * Searches in the parent hierarchy for a {@link Tree} with a {@link Symbol}.
+ * Returns this {@link Symbol} or null, if no {@link Symbol} was found.
+ *
+ */
 class GetNextParentSymbol implements Function<Tree, Symbol> {
 	//	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private Function<Tree, Symbol> getSymbol = new GetSymbol();
