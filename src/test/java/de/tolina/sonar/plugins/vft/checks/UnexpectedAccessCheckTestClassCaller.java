@@ -12,6 +12,7 @@ class UnexpectedAccessCheckTestClassCaller {
 
 	private static final UnexpectedAccessCheckTestClassCallee staticCallee = new UnexpectedAccessCheckTestClassCallee(); // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
 	static final Object staticObject = staticCallee.visibleForTesting; // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
+	static final Object staticObjectFromStatic = UnexpectedAccessCheckTestClassCallee.staticVisibleForTesting; // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
 
 	static {
 		staticCallee.methodeCallee(); // Noncompliant {{You must not access to package-private method or field which is annotated by @VisibleForTesting.}}
