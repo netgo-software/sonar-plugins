@@ -14,15 +14,15 @@ import com.google.common.annotations.VisibleForTesting;
  * {@link Predicate} that answers if an {@link AnnotationTree} is placed at a {@link Symbol}
  * with "package protected / default" visibility.
  */
-class IsAnnotationAtPackageVisibleTree implements Predicate<AnnotationTree> {
+class IsAnnotationAtPackageVisibleSymbol implements Predicate<AnnotationTree> {
 	private final Function<Tree, Symbol> getNextParentSymbol;
 
 	@VisibleForTesting
-	IsAnnotationAtPackageVisibleTree(final Function<Tree, Symbol> getNextParentSymbol) {
+	IsAnnotationAtPackageVisibleSymbol(final Function<Tree, Symbol> getNextParentSymbol) {
 		this.getNextParentSymbol = getNextParentSymbol;
 	}
 
-	IsAnnotationAtPackageVisibleTree() {
+	IsAnnotationAtPackageVisibleSymbol() {
 		this(new GetNextParentSymbol());
 	}
 

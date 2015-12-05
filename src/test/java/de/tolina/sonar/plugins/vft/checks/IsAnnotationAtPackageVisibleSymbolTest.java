@@ -18,7 +18,7 @@ import org.sonar.plugins.java.api.tree.Tree;
 
 @SuppressWarnings("javadoc")
 @RunWith(MockitoJUnitRunner.class)
-public class IsAnnotationAtPackageVisibleTreeTest {
+public class IsAnnotationAtPackageVisibleSymbolTest {
 
 	private Predicate<AnnotationTree> isAnnotationAtPackageVisibleTree;
 
@@ -31,7 +31,7 @@ public class IsAnnotationAtPackageVisibleTreeTest {
 
 	@Before
 	public void initTestObject() {
-		isAnnotationAtPackageVisibleTree = new IsAnnotationAtPackageVisibleTree(getNextParentSymbol);
+		isAnnotationAtPackageVisibleTree = new IsAnnotationAtPackageVisibleSymbol(getNextParentSymbol);
 	}
 
 	@Test

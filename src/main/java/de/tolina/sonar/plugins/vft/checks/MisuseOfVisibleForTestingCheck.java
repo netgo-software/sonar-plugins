@@ -33,7 +33,7 @@ public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements J
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	private final Predicate<AnnotationTree> isAtPackageVisibleTree = new IsAnnotationAtPackageVisibleTree();
+	private final Predicate<AnnotationTree> isAtPackageVisibleTree = new IsAnnotationAtPackageVisibleSymbol();
 
 
 	static final String RULE_KEY = "MisuseOfVisibleForTesting";
