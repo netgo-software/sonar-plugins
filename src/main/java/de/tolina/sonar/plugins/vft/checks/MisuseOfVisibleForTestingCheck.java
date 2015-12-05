@@ -17,7 +17,7 @@ import org.sonar.plugins.java.api.tree.TypeTree;
 
 import com.google.common.annotations.VisibleForTesting;
 
-import de.tolina.sonar.plugins.Tags;
+import de.tolina.sonar.plugins.SonarQubeTags;
 
 
 /**
@@ -26,7 +26,7 @@ import de.tolina.sonar.plugins.Tags;
 @Rule(key = MisuseOfVisibleForTestingCheck.RULE_KEY, // 
 name = MisuseOfVisibleForTestingCheck.RULE_NAME, // 
 description = MisuseOfVisibleForTestingCheck.RULE_NAME, //
-tags = { Tags.BAD_PRACTICE, Tags.DESIGN })
+tags = { SonarQubeTags.BAD_PRACTICE, SonarQubeTags.DESIGN })
 public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements JavaFileScanner {
 
 	private static final String VISIBLE_FOR_TESTING = VisibleForTesting.class.getCanonicalName();

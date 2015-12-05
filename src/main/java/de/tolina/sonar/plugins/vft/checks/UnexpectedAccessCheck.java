@@ -18,7 +18,7 @@ import org.sonar.plugins.java.api.tree.Tree;
 
 import com.google.common.annotations.VisibleForTesting;
 
-import de.tolina.sonar.plugins.Tags;
+import de.tolina.sonar.plugins.SonarQubeTags;
 
 
 /**
@@ -29,7 +29,7 @@ import de.tolina.sonar.plugins.Tags;
 @Rule(key = UnexpectedAccessCheck.RULE_KEY, // 
 name = UnexpectedAccessCheck.RULE_NAME, // 
 description = UnexpectedAccessCheck.RULE_NAME, //
-tags = { Tags.BAD_PRACTICE, Tags.DESIGN })
+tags = { SonarQubeTags.BAD_PRACTICE, SonarQubeTags.DESIGN })
 public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileScanner {
 
 	//private final Logger logger = LoggerFactory.getLogger(this.getClass());
