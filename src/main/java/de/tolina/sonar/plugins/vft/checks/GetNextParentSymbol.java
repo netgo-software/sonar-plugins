@@ -28,8 +28,8 @@ class GetNextParentSymbol implements Function<Tree, Symbol> {
 		}
 		final Optional<Tree> parent = treeNullable.map((tree) -> tree.parent());
 		final Optional<Symbol> symbol = parent.map(getSymbol);
-		final Supplier<Symbol> getFromParent = () -> (apply(parent.orElse(null)));
-		return symbol.orElseGet(getFromParent);
+		final Supplier<Symbol> getSymbolFromParent = () -> (apply(parent.orElse(null)));
+		return symbol.orElseGet(getSymbolFromParent);
 	}
 }
 
