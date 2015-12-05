@@ -28,8 +28,7 @@ class HasVisibleForTesting implements Predicate<Symbol> {
 	public boolean test(Symbol symbol) {
 		final Optional<Collection<AnnotationInstance>> annotationsOptional = Optional.ofNullable(symbol).map(s -> s.metadata()).map(m -> m.annotations());
 		final Collection<AnnotationInstance> annotations = annotationsOptional.orElse(Collections.emptyList());
-		final Optional<AnnotationInstance> annotationOptional = annotations.stream().filter(isVisibleForTestingAnnotation).findAny();
-		boolean hasVisibleForTesting = annotationOptional.isPresent();
+		boolean hasVisibleForTesting = annotations.stream().anyMatch(isVisibleForTestingAnnotation);
 		return hasVisibleForTesting;
 	}
 
