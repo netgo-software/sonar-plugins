@@ -46,6 +46,12 @@ class MisuseOfVisibleForTestingCheckerTestClass {
 	}
 
 	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
+	protected void protectedMethod() {
+		// NOOP
+	}
+
+
+	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}}
 	public void publicMethod() {
 		// NOOP
 	}
