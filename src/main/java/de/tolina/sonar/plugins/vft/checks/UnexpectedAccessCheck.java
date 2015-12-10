@@ -8,6 +8,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.sonar.check.Rule;
+import org.sonar.java.tag.Tag;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.semantic.Symbol;
@@ -18,8 +19,6 @@ import org.sonar.plugins.java.api.tree.Tree;
 
 import com.google.common.annotations.VisibleForTesting;
 
-import de.tolina.sonar.plugins.SonarQubeTags;
-
 
 /**
  * Checks accessing fields and methods marked as {@link VisibleForTesting}.
@@ -29,7 +28,7 @@ import de.tolina.sonar.plugins.SonarQubeTags;
 @Rule(key = UnexpectedAccessCheck.RULE_KEY, // 
 name = UnexpectedAccessCheck.RULE_NAME, // 
 description = UnexpectedAccessCheck.RULE_NAME, //
-tags = { SonarQubeTags.BAD_PRACTICE, SonarQubeTags.DESIGN })
+tags = { Tag.BAD_PRACTICE, Tag.DESIGN })
 public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileScanner {
 
 	//private final Logger logger = LoggerFactory.getLogger(this.getClass());

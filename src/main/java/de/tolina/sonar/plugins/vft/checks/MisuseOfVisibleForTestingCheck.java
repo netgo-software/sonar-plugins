@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.check.Rule;
+import org.sonar.java.tag.Tag;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.AnnotationTree;
@@ -17,8 +18,6 @@ import org.sonar.plugins.java.api.tree.TypeTree;
 
 import com.google.common.annotations.VisibleForTesting;
 
-import de.tolina.sonar.plugins.SonarQubeTags;
-
 
 /**
  * Checks if the {@link VisibleForTesting} annotation is set only at package-protected fields and mehtods.
@@ -26,7 +25,7 @@ import de.tolina.sonar.plugins.SonarQubeTags;
 @Rule(key = MisuseOfVisibleForTestingCheck.RULE_KEY, // 
 name = MisuseOfVisibleForTestingCheck.RULE_NAME, // 
 description = MisuseOfVisibleForTestingCheck.RULE_NAME, //
-tags = { SonarQubeTags.BAD_PRACTICE, SonarQubeTags.DESIGN })
+tags = { Tag.BAD_PRACTICE, Tag.DESIGN })
 public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements JavaFileScanner {
 
 	private static final String VISIBLE_FOR_TESTING = VisibleForTesting.class.getCanonicalName();
