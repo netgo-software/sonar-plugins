@@ -34,8 +34,8 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 	//private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	static final String RULE_KEY = "UnexpectedAccessToVisibleForTesting";
-	static final String RULE_NAME = "You must not access to package-private method or field which is annotated by @VisibleForTesting.";
-	static final String RULE_DESCRIPTION = "<p>You must not access to package-private method or field which is annotated by @VisibleForTesting.</p>"//
+	static final String RULE_NAME = "You must not access package-private method or field which is annotated by @VisibleForTesting.";
+	static final String RULE_DESCRIPTION = "<p>You must not access package-private method or field which is annotated by @VisibleForTesting.</p>"//
 			+ "<p>This annotation means that visibility was widened only for test code, so your implementation code</p>"//
 			+ "<p>shouldn't access to method which is annotated by this annotation.</p>";
 
