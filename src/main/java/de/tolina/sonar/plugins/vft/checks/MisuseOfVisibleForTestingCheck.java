@@ -28,7 +28,7 @@ description = MisuseOfVisibleForTestingCheck.RULE_NAME, //
 tags = { Tag.BAD_PRACTICE, Tag.DESIGN })
 public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements JavaFileScanner {
 
-	private static final String VISIBLE_FOR_TESTING = VisibleForTesting.class.getCanonicalName();
+	private static final String VISIBLE_FOR_TESTING_FQN = VisibleForTesting.class.getCanonicalName();
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -50,7 +50,7 @@ public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements J
 	@Override
 	public void visitAnnotation(final AnnotationTree annotationTree) {
 		final TypeTree annotationType = annotationTree.annotationType();
-		boolean isVisibleForTesting = annotationType.symbolType().is(VISIBLE_FOR_TESTING);
+		boolean isVisibleForTesting = annotationType.symbolType().is(VISIBLE_FOR_TESTING_FQN);
 		if (isVisibleForTesting) {
 			logger.debug("VisibleForTesting found");
 			final Optional<AnnotationTree> vftAtNotPackageProtected = Optional.of(annotationTree).filter(isAtPackageVisibleTree.negate());
