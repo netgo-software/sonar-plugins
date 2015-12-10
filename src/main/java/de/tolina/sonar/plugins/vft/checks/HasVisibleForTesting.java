@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.sonar.plugins.java.api.semantic.Symbol;
@@ -16,16 +17,14 @@ import com.google.common.annotations.VisibleForTesting;
 class HasVisibleForTesting implements Predicate<Symbol> {
 	private final Predicate<AnnotationInstance> isVisibleForTestingAnnotation;
 
-
 	HasVisibleForTesting() {
 		this(new IsVisibleForTesting());
 	}
 
 	@VisibleForTesting
-	HasVisibleForTesting(final Predicate<AnnotationInstance> isVisibleForTestingAnnotation) {
+	HasVisibleForTesting(final @Nonnull Predicate<AnnotationInstance> isVisibleForTestingAnnotation) {
 		this.isVisibleForTestingAnnotation = isVisibleForTestingAnnotation;
 	}
-
 
 	@Override
 	public boolean test(final @Nullable Symbol symbol) {
@@ -33,7 +32,7 @@ class HasVisibleForTesting implements Predicate<Symbol> {
 				map(Symbol::metadata).//
 				map(SymbolMetadata::annotations);
 		final Collection<AnnotationInstance> annotations = annotationsOptional.orElse(Collections.emptyList());
-		boolean hasVisibleForTesting = annotations.stream().anyMatch(isVisibleForTestingAnnotation);
+		final boolean hasVisibleForTesting = annotations.stream().anyMatch(isVisibleForTestingAnnotation);
 		return hasVisibleForTesting;
 	}
 

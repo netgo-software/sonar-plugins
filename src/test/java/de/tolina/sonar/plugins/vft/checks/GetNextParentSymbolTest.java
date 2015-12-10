@@ -53,21 +53,19 @@ public class GetNextParentSymbolTest {
 
 	@Test
 	public void testParentClassTree() throws Exception {
-		ClassTree classTree = mock(ClassTree.class);
+		final ClassTree classTree = mock(ClassTree.class);
 		when(parentWithoutSymbol2.parent()).thenReturn(classTree);
-		TypeSymbol symbol = mock(TypeSymbol.class);
+		final TypeSymbol symbol = mock(TypeSymbol.class);
 		when(classTree.symbol()).thenReturn(symbol);
-
 		assertSame(symbol, getNextParentSymbol.apply(tree));
 	}
 
 	@Test
 	public void testParentVariableTree() throws Exception {
-		VariableTree variableTree = mock(VariableTree.class);
+		final VariableTree variableTree = mock(VariableTree.class);
 		when(parentWithoutSymbol2.parent()).thenReturn(variableTree);
-		Symbol symbol = mock(Symbol.class);
+		final Symbol symbol = mock(Symbol.class);
 		when(variableTree.symbol()).thenReturn(symbol);
-
 		assertSame(symbol, getNextParentSymbol.apply(tree));
 	}
 }

@@ -21,8 +21,9 @@ public class TolinaSonarPlugin extends SonarPlugin {
 	public static final String JAVA_LANG = "java";
 
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public List getExtensions() {
+	public List<Class<?>> getExtensions() {
 		return Arrays.asList(VisibleForTestingCheckRegistrarAndRulesDefinition.class);
 	}
 

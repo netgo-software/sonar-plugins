@@ -83,5 +83,4 @@ public class GetSymbolTest {
 		when(tree.symbol()).thenReturn(symbol);
 		assertSame(symbol, getSymbol.apply(tree));
 	}
-
 }

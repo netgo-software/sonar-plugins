@@ -12,7 +12,6 @@ import org.sonar.java.checks.verifier.JavaCheckVerifier;
  */
 public class MisuseOfVisibleForTestingCheckTest {
 
-
 	private MisuseOfVisibleForTestingCheck check;
 
 	@SuppressWarnings("javadoc")

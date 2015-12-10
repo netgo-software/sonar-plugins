@@ -2,6 +2,8 @@ package de.tolina.sonar.plugins.vft;
 
 import java.util.Collections;
 
+import javax.annotation.Nonnull;
+
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionAnnotationLoader;
 import org.sonar.plugins.java.api.CheckRegistrar;
@@ -15,15 +17,15 @@ import de.tolina.sonar.plugins.TolinaSonarPlugin;
  */
 public class VisibleForTestingCheckRegistrarAndRulesDefinition implements CheckRegistrar, RulesDefinition {
 
-	@Override
-	public void register(RegistrarContext registrarContext) {
-		registrarContext.registerClassesForRepository(DefaultChecks.REPOSITORY_KEY, DefaultChecks.getChecks(), Collections.emptyList());
-	}
-
 	private static final String VISIBLE_FOR_TESTING = "VisibleForTesting";
 
 	@Override
-	public void define(Context context) {
+	public void register(final @Nonnull RegistrarContext registrarContext) {
+		registrarContext.registerClassesForRepository(DefaultChecks.REPOSITORY_KEY, DefaultChecks.getChecks(), Collections.emptyList());
+	}
+
+	@Override
+	public void define(final @Nonnull Context context) {
 		final NewRepository repository = context.createRepository(DefaultChecks.REPOSITORY_KEY, TolinaSonarPlugin.JAVA_LANG);
 		repository.setName(VISIBLE_FOR_TESTING);
 		final RulesDefinitionAnnotationLoader annotationLoader = new RulesDefinitionAnnotationLoader();

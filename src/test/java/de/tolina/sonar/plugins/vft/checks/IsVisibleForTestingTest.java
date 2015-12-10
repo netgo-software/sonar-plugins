@@ -55,5 +55,4 @@ public class IsVisibleForTestingTest {
 		when(owner.name()).thenReturn(IsVisibleForTesting.ANNOTATION_PACKAGE);
 		assertTrue(isVisibleForTesting.test(annotatioInstance));
 	}
-
 }

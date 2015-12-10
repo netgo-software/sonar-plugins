@@ -48,7 +48,5 @@ public class IsAnnotationAtPackageVisibleSymbolTest {
 
 		when(Boolean.valueOf(nextParentSymbol.isPackageVisibility())).thenReturn(Boolean.TRUE);
 		assertTrue(isAnnotationAtPackageVisibleTree.test(annotationTree));
-
 	}
-
 }

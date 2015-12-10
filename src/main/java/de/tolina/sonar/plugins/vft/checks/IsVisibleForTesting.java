@@ -18,12 +18,10 @@ class IsVisibleForTesting implements Predicate<AnnotationInstance> {
 	//	/** commons-logging Logger für diese Klasse. Per Default auskommentiert */
 	//	private final transient Log log = LogFactory.getLog(this.getClass());
 
-
 	@VisibleForTesting
 	final static String ANNOTATION_PACKAGE = "com.google.common.annotations";
 	@VisibleForTesting
 	final static String ANNOTATION_CLASS = "VisibleForTesting";
-
 
 	@Override
 	public boolean test(final @Nullable AnnotationInstance annotationInstance) {
@@ -35,10 +33,9 @@ class IsVisibleForTesting implements Predicate<AnnotationInstance> {
 				map(Symbol::owner).//
 				map(Symbol::name);
 
-		boolean samePackage = Objects.equals(ANNOTATION_PACKAGE, annotationPackage.orElse(null));
-		boolean sameClass = Objects.equals(ANNOTATION_CLASS, annotationClass.orElse(null));
+		final boolean samePackage = Objects.equals(ANNOTATION_PACKAGE, annotationPackage.orElse(null));
+		final boolean sameClass = Objects.equals(ANNOTATION_CLASS, annotationClass.orElse(null));
 
 		return sameClass && samePackage;
 	}
-
 }

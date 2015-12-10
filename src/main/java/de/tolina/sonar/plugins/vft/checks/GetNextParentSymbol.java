@@ -18,7 +18,6 @@ class GetNextParentSymbol implements Function<Tree, Symbol> {
 	//	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private final Function<Tree, Symbol> getSymbol = new GetSymbol();
 
-
 	@Override
 	@Nullable
 	public Symbol apply(final @Nullable Tree t) {

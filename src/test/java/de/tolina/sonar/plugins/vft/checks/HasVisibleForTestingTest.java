@@ -41,44 +41,36 @@ public class HasVisibleForTestingTest {
 		when(symbol.metadata()).thenReturn(metaData);
 	}
 
-
 	@Test
 	public void testNoAnnotationsAtSymbol() throws Exception {
 		assertFalse(hasVisibleForTestingPredicate.test(symbol));
-
 	}
 
 	@Test
 	public void testOtherAnnotationsAtSymbol() throws Exception {
-		AnnotationInstance annotation1 = mock(AnnotationInstance.class);
-		AnnotationInstance annotation2 = mock(AnnotationInstance.class);
-		AnnotationInstance annotation3 = mock(AnnotationInstance.class);
-		List<AnnotationInstance> annotations = Arrays.asList(annotation1, annotation2, annotation3);
+		final AnnotationInstance annotation1 = mock(AnnotationInstance.class);
+		final AnnotationInstance annotation2 = mock(AnnotationInstance.class);
+		final AnnotationInstance annotation3 = mock(AnnotationInstance.class);
+		final List<AnnotationInstance> annotations = Arrays.asList(annotation1, annotation2, annotation3);
 		when(metaData.annotations()).thenReturn(annotations);
 
 		when(Boolean.valueOf(isVisibleForTestingAnnotation.test(annotation1))).thenReturn(Boolean.FALSE);
 		when(Boolean.valueOf(isVisibleForTestingAnnotation.test(annotation2))).thenReturn(Boolean.FALSE);
 		when(Boolean.valueOf(isVisibleForTestingAnnotation.test(annotation3))).thenReturn(Boolean.FALSE);
 		assertFalse(hasVisibleForTestingPredicate.test(symbol));
-
 	}
 
 	@Test
 	public void testVisibleForTestingAtSymbol() throws Exception {
-		AnnotationInstance annotation1 = mock(AnnotationInstance.class);
-		AnnotationInstance annotation2 = mock(AnnotationInstance.class);
-		AnnotationInstance annotation3 = mock(AnnotationInstance.class);
-		List<AnnotationInstance> annotations = Arrays.asList(annotation1, annotation2, annotation3);
+		final AnnotationInstance annotation1 = mock(AnnotationInstance.class);
+		final AnnotationInstance annotation2 = mock(AnnotationInstance.class);
+		final AnnotationInstance annotation3 = mock(AnnotationInstance.class);
+		final List<AnnotationInstance> annotations = Arrays.asList(annotation1, annotation2, annotation3);
 		when(metaData.annotations()).thenReturn(annotations);
 
 		when(Boolean.valueOf(isVisibleForTestingAnnotation.test(annotation1))).thenReturn(Boolean.FALSE);
 		when(Boolean.valueOf(isVisibleForTestingAnnotation.test(annotation2))).thenReturn(Boolean.TRUE);
 		when(Boolean.valueOf(isVisibleForTestingAnnotation.test(annotation3))).thenReturn(Boolean.FALSE);
 		assertTrue(hasVisibleForTestingPredicate.test(symbol));
-
 	}
-
-
-
-
 }

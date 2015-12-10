@@ -14,6 +14,8 @@ class MisuseOfVisibleForTestingCheckerTestClass {
 	@VisibleForTesting
 	Object defaultObject = new Object();
 	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}} 
+	protected Object protectedObject = new Object();
+	@VisibleForTesting // Noncompliant {{You must use @VisibleForTesting annotation only at package-private methods or package-private fields.}} 
 	public Object publicObject = new Object();
 
 	@VisibleForTesting

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import javax.annotation.Nonnull;
+
 import org.sonar.plugins.java.api.JavaCheck;
 
 import de.tolina.sonar.plugins.vft.checks.MisuseOfVisibleForTestingCheck;
@@ -23,7 +25,7 @@ class DefaultChecks {
 		initChecks(defaultChecks);
 	}
 
-	private static void initChecks(final Collection<Class<? extends JavaCheck>> checks) {
+	private static void initChecks(final @Nonnull Collection<Class<? extends JavaCheck>> checks) {
 		checks.add(UnexpectedAccessCheck.class);
 		checks.add(MisuseOfVisibleForTestingCheck.class);
 	}
@@ -36,7 +38,7 @@ class DefaultChecks {
 		return getClassArray(getChecks());
 	}
 
-	private static Class<?>[] getClassArray(Collection<Class<? extends JavaCheck>> checks) {
+	private static Class<?>[] getClassArray(final @Nonnull Collection<Class<? extends JavaCheck>> checks) {
 		return checks.toArray(new Class[checks.size()]);
 	}
 }

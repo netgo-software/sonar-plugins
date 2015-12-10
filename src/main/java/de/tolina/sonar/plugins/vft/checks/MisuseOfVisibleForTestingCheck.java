@@ -36,7 +36,6 @@ public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements J
 
 	private final Predicate<AnnotationTree> isAtPackageVisibleTree = new IsAnnotationAtPackageVisibleSymbol();
 
-
 	static final String RULE_KEY = "MisuseOfVisibleForTesting";
 	static final String RULE_NAME = "You must use @VisibleForTesting annotation only at package-private methods or package-private fields.";
 	static final String RULE_DESCRIPTION = RULE_NAME;
@@ -44,7 +43,7 @@ public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements J
 	private JavaFileScannerContext context;
 
 	@Override
-	public void scanFile(JavaFileScannerContext ctx) {
+	public void scanFile(final @Nonnull JavaFileScannerContext ctx) {
 		context = ctx;
 		scan(ctx.getTree());
 	}
@@ -52,7 +51,7 @@ public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements J
 	@Override
 	public void visitAnnotation(final @Nonnull AnnotationTree annotationTree) {
 		final TypeTree annotationType = annotationTree.annotationType();
-		boolean isVisibleForTesting = annotationType.symbolType().is(VISIBLE_FOR_TESTING_FQN);
+		final boolean isVisibleForTesting = annotationType.symbolType().is(VISIBLE_FOR_TESTING_FQN);
 		if (isVisibleForTesting) {
 			logger.debug("VisibleForTesting found");
 			final Optional<AnnotationTree> vftAtNotPackageProtected = Optional.of(annotationTree).filter(isAtPackageVisibleTree.negate());
@@ -60,7 +59,4 @@ public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements J
 		}
 		super.visitAnnotation(annotationTree);
 	}
-
-
-
 }

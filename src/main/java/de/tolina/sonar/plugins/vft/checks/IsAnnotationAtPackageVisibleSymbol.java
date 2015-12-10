@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.sonar.plugins.java.api.semantic.Symbol;
@@ -20,14 +21,13 @@ class IsAnnotationAtPackageVisibleSymbol implements Predicate<AnnotationTree> {
 	private final Function<Tree, Symbol> getNextParentSymbol;
 
 	@VisibleForTesting
-	IsAnnotationAtPackageVisibleSymbol(final Function<Tree, Symbol> getNextParentSymbol) {
+	IsAnnotationAtPackageVisibleSymbol(final @Nonnull Function<Tree, Symbol> getNextParentSymbol) {
 		this.getNextParentSymbol = getNextParentSymbol;
 	}
 
 	IsAnnotationAtPackageVisibleSymbol() {
 		this(new GetNextParentSymbol());
 	}
-
 
 	@Override
 	public boolean test(final @Nullable AnnotationTree annotationTree) {
