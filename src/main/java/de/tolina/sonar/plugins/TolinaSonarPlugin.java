@@ -8,8 +8,7 @@ import java.util.List;
 
 import org.sonar.api.SonarPlugin;
 
-import de.tolina.sonar.plugins.vft.VisibleForTestingCheckRegistrar;
-import de.tolina.sonar.plugins.vft.VisibleForTestingRulesDefinition;
+import de.tolina.sonar.plugins.vft.VisibleForTestingCheckRegistrarAndRulesDefinition;
 
 /**
  * A collection of tolinas Sonar-Plugins
@@ -24,7 +23,7 @@ public class TolinaSonarPlugin extends SonarPlugin {
 
 	@Override
 	public List getExtensions() {
-		return Arrays.asList(VisibleForTestingRulesDefinition.class, VisibleForTestingCheckRegistrar.class);
+		return Arrays.asList(VisibleForTestingCheckRegistrarAndRulesDefinition.class);
 	}
 
 }
