@@ -26,7 +26,7 @@ class GetNextParentSymbol implements Function<Tree, Symbol> {
 		if (!treeNullable.isPresent()) {
 			return null;
 		}
-		final Optional<Tree> parent = treeNullable.map((tree) -> tree.parent());
+		final Optional<Tree> parent = treeNullable.map(Tree::parent);
 		final Optional<Symbol> symbol = parent.map(getSymbol);
 		final Supplier<Symbol> getSymbolFromParent = () -> (apply(parent.orElse(null)));
 		return symbol.orElseGet(getSymbolFromParent);

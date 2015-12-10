@@ -30,7 +30,7 @@ class IsAnnotationAtPackageVisibleSymbol implements Predicate<AnnotationTree> {
 	@Override
 	public boolean test(final AnnotationTree annotationTree) {
 		final Optional<Symbol> symbol = Optional.ofNullable(annotationTree).map(getNextParentSymbol);
-		final Boolean isAtPackageVisibleTree = symbol.map(s -> Boolean.valueOf(s.isPackageVisibility())).//
+		final Boolean isAtPackageVisibleTree = symbol.map(Symbol::isPackageVisibility).//
 				orElse(Boolean.FALSE);
 		return isAtPackageVisibleTree.booleanValue();
 	}

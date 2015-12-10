@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
+import org.sonar.plugins.java.api.semantic.Symbol;
 import org.sonar.plugins.java.api.semantic.SymbolMetadata.AnnotationInstance;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -27,12 +28,12 @@ class IsVisibleForTesting implements Predicate<AnnotationInstance> {
 	@Override
 	public boolean test(final @Nullable AnnotationInstance annotationInstance) {
 		final Optional<String> annotationClass = Optional.ofNullable(annotationInstance).//
-				map(ai -> ai.symbol()).//
-				map(symbol -> symbol.name());
+				map(AnnotationInstance::symbol).//
+				map(Symbol::name);
 		final Optional<String> annotationPackage = Optional.ofNullable(annotationInstance).//
-				map(ai -> ai.symbol()).//
-				map(symbol -> symbol.owner()).//
-				map(owner -> owner.name());
+				map(AnnotationInstance::symbol).//
+				map(Symbol::owner).//
+				map(Symbol::name);
 
 		boolean samePackage = Objects.equals(ANNOTAION_PACKAGE, annotationPackage.orElse(null));
 		boolean sameClass = Objects.equals(ANNOTAION_CLASS, annotationClass.orElse(null));
