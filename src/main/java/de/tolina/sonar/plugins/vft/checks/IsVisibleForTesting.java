@@ -20,9 +20,9 @@ class IsVisibleForTesting implements Predicate<AnnotationInstance> {
 
 
 	@VisibleForTesting
-	final static String ANNOTAION_PACKAGE = "com.google.common.annotations";
+	final static String ANNOTATION_PACKAGE = "com.google.common.annotations";
 	@VisibleForTesting
-	final static String ANNOTAION_CLASS = "VisibleForTesting";
+	final static String ANNOTATION_CLASS = "VisibleForTesting";
 
 
 	@Override
@@ -35,8 +35,8 @@ class IsVisibleForTesting implements Predicate<AnnotationInstance> {
 				map(Symbol::owner).//
 				map(Symbol::name);
 
-		boolean samePackage = Objects.equals(ANNOTAION_PACKAGE, annotationPackage.orElse(null));
-		boolean sameClass = Objects.equals(ANNOTAION_CLASS, annotationClass.orElse(null));
+		boolean samePackage = Objects.equals(ANNOTATION_PACKAGE, annotationPackage.orElse(null));
+		boolean sameClass = Objects.equals(ANNOTATION_CLASS, annotationClass.orElse(null));
 
 		return sameClass && samePackage;
 	}

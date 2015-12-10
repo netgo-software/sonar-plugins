@@ -43,8 +43,8 @@ public class IsVisibleForTestingTest {
 		when(owner.name()).thenReturn("OtherClass");
 		assertFalse(isVisibleForTesting.test(annotatioInstance));
 
-		when(symbol.name()).thenReturn(IsVisibleForTesting.ANNOTAION_CLASS);
-		when(owner.name()).thenReturn(IsVisibleForTesting.ANNOTAION_PACKAGE);
+		when(symbol.name()).thenReturn(IsVisibleForTesting.ANNOTATION_CLASS);
+		when(owner.name()).thenReturn(IsVisibleForTesting.ANNOTATION_PACKAGE);
 		assertTrue(isVisibleForTesting.test(annotatioInstance));
 	}
 
