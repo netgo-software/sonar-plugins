@@ -7,6 +7,8 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import javax.annotation.Nonnull;
+
 import org.sonar.check.Rule;
 import org.sonar.java.tag.Tag;
 import org.sonar.plugins.java.api.JavaFileScanner;
@@ -52,7 +54,7 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 
 
 	@Override
-	public void visitNewClass(NewClassTree tree) {
+	public void visitNewClass(final @Nonnull NewClassTree tree) {
 		final Symbol symbol = getSymbol.apply(tree);
 		addIssueIfNeeded(symbol, tree);
 		super.visitNewClass(tree);
@@ -60,7 +62,7 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 
 
 	@Override
-	public void visitMemberSelectExpression(final MemberSelectExpressionTree tree) {
+	public void visitMemberSelectExpression(final @Nonnull MemberSelectExpressionTree tree) {
 		final Symbol symbol = tree.identifier().symbol();
 		addIssueIfNeeded(symbol, tree);
 		super.visitMemberSelectExpression(tree);

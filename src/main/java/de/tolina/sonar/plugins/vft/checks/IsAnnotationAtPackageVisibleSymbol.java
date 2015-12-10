@@ -4,6 +4,8 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import javax.annotation.Nullable;
+
 import org.sonar.plugins.java.api.semantic.Symbol;
 import org.sonar.plugins.java.api.tree.AnnotationTree;
 import org.sonar.plugins.java.api.tree.Tree;
@@ -28,7 +30,7 @@ class IsAnnotationAtPackageVisibleSymbol implements Predicate<AnnotationTree> {
 
 
 	@Override
-	public boolean test(final AnnotationTree annotationTree) {
+	public boolean test(final @Nullable AnnotationTree annotationTree) {
 		final Optional<Symbol> symbol = Optional.ofNullable(annotationTree).map(getNextParentSymbol);
 		final Boolean isAtPackageVisibleTree = symbol.map(Symbol::isPackageVisibility).//
 				orElse(Boolean.FALSE);

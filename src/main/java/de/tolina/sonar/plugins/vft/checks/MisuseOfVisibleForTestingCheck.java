@@ -6,6 +6,8 @@ package de.tolina.sonar.plugins.vft.checks;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import javax.annotation.Nonnull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.check.Rule;
@@ -48,7 +50,7 @@ public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements J
 	}
 
 	@Override
-	public void visitAnnotation(final AnnotationTree annotationTree) {
+	public void visitAnnotation(final @Nonnull AnnotationTree annotationTree) {
 		final TypeTree annotationType = annotationTree.annotationType();
 		boolean isVisibleForTesting = annotationType.symbolType().is(VISIBLE_FOR_TESTING_FQN);
 		if (isVisibleForTesting) {

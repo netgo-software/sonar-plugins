@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import javax.annotation.Nullable;
+
 import org.sonar.plugins.java.api.semantic.Symbol;
 import org.sonar.plugins.java.api.semantic.SymbolMetadata;
 import org.sonar.plugins.java.api.semantic.SymbolMetadata.AnnotationInstance;
@@ -26,7 +28,7 @@ class HasVisibleForTesting implements Predicate<Symbol> {
 
 
 	@Override
-	public boolean test(Symbol symbol) {
+	public boolean test(final @Nullable Symbol symbol) {
 		final Optional<Collection<AnnotationInstance>> annotationsOptional = Optional.ofNullable(symbol).//
 				map(Symbol::metadata).//
 				map(SymbolMetadata::annotations);

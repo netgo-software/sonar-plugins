@@ -21,7 +21,7 @@ class GetSymbol implements Function<Tree, Symbol> {
 
 	@Override
 	@Nullable
-	public Symbol apply(@Nullable Tree t) {
+	public Symbol apply(final @Nullable Tree t) {
 		if (t instanceof ClassTree) {
 			return ((ClassTree) t).symbol();
 		}
