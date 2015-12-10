@@ -1,7 +1,7 @@
 package de.tolina.sonar.plugins.vft.checks;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -58,7 +58,7 @@ public class GetNextParentSymbolTest {
 		TypeSymbol symbol = mock(TypeSymbol.class);
 		when(classTree.symbol()).thenReturn(symbol);
 
-		assertEquals(symbol, getNextParentSymbol.apply(tree));
+		assertSame(symbol, getNextParentSymbol.apply(tree));
 	}
 
 	@Test
@@ -68,6 +68,6 @@ public class GetNextParentSymbolTest {
 		Symbol symbol = mock(Symbol.class);
 		when(variableTree.symbol()).thenReturn(symbol);
 
-		assertEquals(symbol, getNextParentSymbol.apply(tree));
+		assertSame(symbol, getNextParentSymbol.apply(tree));
 	}
 }
