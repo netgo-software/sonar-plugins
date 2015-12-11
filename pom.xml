@@ -13,13 +13,12 @@
 
 
 	<name>arxes-tolina Sonar Plugins</name>
-	<description>Contains a collecion of Sonar plugins</description>
+	<description>Contains a collection of Sonar plugins</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<sonar.java.plugin.version>3.7.1</sonar.java.plugin.version>
 		<sonar.plugin-api.version>5.1</sonar.plugin-api.version>
-		<guava.version>18.0</guava.version>
 	</properties>
 
 	<dependencyManagement>
@@ -33,11 +32,6 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>jcl-over-slf4j</artifactId>
 				<version>1.6.2</version>
-			</dependency>
-			<dependency>
-				<groupId>com.google.guava</groupId>
-				<artifactId>guava</artifactId>
-				<version>${guava.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -118,6 +112,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<pluginClass>de.tolina.sonar.plugins.TolinaSonarPlugin</pluginClass>
+					<pluginUrl>https://github.com/arxes-tolina/sonar-plugins</pluginUrl>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -126,7 +121,10 @@
 				<version>2.10</version>
 				<executions>
 					<execution>
-						<id>copy</id>
+						<!-- We need to provide the dependendency to guava which contains the desired @VisibleForTesting class.
+						     This is only needed for testing since in production environments guava is provided by the project
+						     being analyzed. -->
+						<id>copy-test-dependencies</id>
 						<phase>test-compile</phase>
 						<goals>
 							<goal>copy</goal>
@@ -136,7 +134,7 @@
 								<artifactItem>
 									<groupId>com.google.guava</groupId>
 									<artifactId>guava</artifactId>
-									<version>${guava.version}</version>
+									<version>18.0</version>
 									<type>jar</type>
 								</artifactItem>
 							</artifactItems>
