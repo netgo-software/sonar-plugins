@@ -26,7 +26,7 @@ import com.google.common.annotations.VisibleForTesting;
  */
 @Rule(key = MisuseOfVisibleForTestingCheck.RULE_KEY, // 
 name = MisuseOfVisibleForTestingCheck.RULE_NAME, // 
-description = MisuseOfVisibleForTestingCheck.RULE_NAME, //
+description = MisuseOfVisibleForTestingCheck.RULE_DESCRIPTION, //
 tags = { Tag.BAD_PRACTICE, Tag.DESIGN })
 public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements JavaFileScanner {
 
@@ -37,8 +37,8 @@ public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements J
 	private final Predicate<AnnotationTree> isAtPackageVisibleTree = new IsAnnotationAtPackageVisibleSymbol();
 
 	static final String RULE_KEY = "MisuseOfVisibleForTesting";
-	static final String RULE_NAME = "You must use @VisibleForTesting annotation only at package-private methods or package-private fields.";
-	static final String RULE_DESCRIPTION = RULE_NAME;
+	static final String RULE_NAME = "Misuse of @VisibleForTesting";
+	static final String RULE_DESCRIPTION = "You must use @VisibleForTesting annotation only at package-private methods or package-private fields.";
 
 	private JavaFileScannerContext context;
 

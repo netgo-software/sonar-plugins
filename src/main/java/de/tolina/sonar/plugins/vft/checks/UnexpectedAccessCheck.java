@@ -29,17 +29,15 @@ import com.google.common.annotations.VisibleForTesting;
  */
 @Rule(key = UnexpectedAccessCheck.RULE_KEY, // 
 name = UnexpectedAccessCheck.RULE_NAME, // 
-description = UnexpectedAccessCheck.RULE_NAME, //
+description = UnexpectedAccessCheck.RULE_DESCRIPTION, //
 tags = { Tag.BAD_PRACTICE, Tag.DESIGN })
 public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileScanner {
 
 	//private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	static final String RULE_KEY = "UnexpectedAccessToVisibleForTesting";
-	static final String RULE_NAME = "You must not access package-private method or field which is annotated by @VisibleForTesting.";
-	static final String RULE_DESCRIPTION = "<p>You must not access package-private method or field which is annotated by @VisibleForTesting.</p>"//
-			+ "<p>This annotation means that visibility was widened only for test code, so your implementation code</p>"//
-			+ "<p>shouldn't access method which is annotated by this annotation.</p>";
+	static final String RULE_NAME = "Unexpected access to @VisibleForTesting";
+	static final String RULE_DESCRIPTION = "You must not access package-private method or field which is annotated by @VisibleForTesting.";
 
 	private JavaFileScannerContext context;
 
@@ -70,7 +68,7 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 
 	private void addIssueIfNeeded(final Symbol symbol, final Tree tree) {
 		final Optional<Symbol> symbolWithVisibleForTesting = Optional.ofNullable(symbol).filter(hasVisibleForTestingPredicate);
-		symbolWithVisibleForTesting.ifPresent(s -> context.addIssue(tree, this, String.format(RULE_NAME)));
+		symbolWithVisibleForTesting.ifPresent(s -> context.addIssue(tree, this, String.format(RULE_DESCRIPTION)));
 	}
 
 }
