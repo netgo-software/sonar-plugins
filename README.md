@@ -1,5 +1,6 @@
 # sonar-plugins
-[![wercker status](https://app.wercker.com/status/53356c399a2ec78b535c670da845465c/s "wercker status")](https://app.wercker.com/project/bykey/53356c399a2ec78b535c670da845465c)
+[![Build Status](https://travis-ci.org/arxes-tolina/sonar-plugins.svg?branch=master)](https://travis-ci.org/arxes-tolina/sonar-plugins)
+
 ## Description
 Contains rules for detecting illegal access and illegal use of `@VisibleForTesting`
 ### de.tolina.sonar.plugins.vft.checks.UnexpectedAccessCheck
