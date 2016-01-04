@@ -1,0 +1,9 @@
+language: java
+deploy:
+  provider: releases
+  api_key:
+    secure: ${apikey}
+  file: target/*.jar
+  on:
+    tags: true
+    repo: arxes-tolina/sonar-plugins
