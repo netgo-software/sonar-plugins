@@ -1,33 +1,37 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.tolina</groupId>
 	<artifactId>sonar-vft-plugin</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 	<packaging>sonar-plugin</packaging>
+
+	<name>VisibleForTesting</name>
+	<description>Check correct usage of Guavas @VisibleForTesting</description>
+	<inceptionYear>2015</inceptionYear>
+	<url>https://github.com/arxes-tolina/sonar-plugins</url>
+
 	<licenses>
 		<license>
 			<name>Apache License 2.0</name>
 			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
 		</license>
 	</licenses>
+
 	<organization>
 		<name>arxes-tolina GmbH</name>
 		<url>https://www.arxes-tolina.de/</url>
 	</organization>
+
 	<issueManagement>
 		<url>https://github.com/arxes-tolina/sonar-plugins/issues</url>
 	</issueManagement>
 
-
 	<scm>
-		<connection>scm:https://github.com/arxes-tolina/sonar-plugins.git</connection>
+		<connection>scm:git:git@github.com:arxes-tolina/sonar-plugins.git</connection>
+		<developerConnection>scm:git:git@github.com:arxes-tolina/sonar-plugins.git</developerConnection>
+		<url>https://github.com/arxes-tolina/sonar-plugins</url>
 		<tag></tag>
 	</scm>
-
-
-	<name>VisibleForTesting</name>
-	<description>Check correct usage of Guavas @VisibleForTesting</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -132,11 +136,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.10</version>
 				<executions>
 					<execution>
-						<!-- We need to provide the dependendency to guava which contains the 
-							desired @VisibleForTesting class. This is only needed for testing since in 
+						<!-- We need to provide the dependendency to guava which contains the
+							desired @VisibleForTesting class. This is only needed for testing since in
 							production environments guava is provided by the project being analyzed. -->
 						<id>copy-test-dependencies</id>
 						<phase>test-compile</phase>
