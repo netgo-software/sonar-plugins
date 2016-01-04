@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.tolina</groupId>
 	<artifactId>sonar-vft-plugin</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.2</version>
 	<packaging>sonar-plugin</packaging>
 
 	<name>VisibleForTesting</name>
@@ -27,8 +27,7 @@
 	</issueManagement>
 
 	<scm>
-		<connection>scm:git:git@github.com:arxes-tolina/sonar-plugins.git</connection>
-		<developerConnection>scm:git:git@github.com:arxes-tolina/sonar-plugins.git</developerConnection>
+		<connection>scm:https://github.com/arxes-tolina/sonar-plugins.git</connection>
 		<url>https://github.com/arxes-tolina/sonar-plugins</url>
 		<tag></tag>
 	</scm>
