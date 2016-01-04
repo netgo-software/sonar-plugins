@@ -1,7 +1,5 @@
-[![wercker status](https://app.wercker.com/status/53356c399a2ec78b535c670da845465c/m "wercker status")](https://app.wercker.com/project/bykey/53356c399a2ec78b535c670da845465c)
-
 # sonar-plugins
-
+[![wercker status](https://app.wercker.com/status/53356c399a2ec78b535c670da845465c/s "wercker status")](https://app.wercker.com/project/bykey/53356c399a2ec78b535c670da845465c)
 ## Description
 Contains rules for detecting illegal access and illegal use of  @VisibleForTesting 
 ### de.tolina.sonar.plugins.vft.checks.UnexpectedAccessCheck
