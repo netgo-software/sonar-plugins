@@ -1,3 +1,5 @@
+[![wercker status](https://app.wercker.com/status/568a6cd981fd0f5022034456/m "wercker status")](https://app.wercker.com/project/bykey/568a6cd981fd0f5022034456)
+
 # sonar-plugins
 
 ## Description
