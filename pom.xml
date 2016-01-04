@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.tolina</groupId>
-	<artifactId>sonar-plugins</artifactId>
+	<artifactId>sonar-guava-plugin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>sonar-plugin</packaging>
 	<licenses>
@@ -26,8 +26,8 @@
 	</scm>
 
 
-	<name>arxes-tolina Sonar Plugins</name>
-	<description>Contains a collection of Sonar plugins</description>
+	<name>VisibleForTesting</name>
+	<description>Check correct usage of Guavas @VisibleForTesting</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
