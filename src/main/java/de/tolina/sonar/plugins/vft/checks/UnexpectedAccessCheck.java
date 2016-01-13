@@ -24,7 +24,7 @@ import com.google.common.annotations.VisibleForTesting;
 
 /**
  * Checks accessing fields and methods marked as {@link VisibleForTesting}.
- * Only accesses form test code or the same class are legal. 
+ * Only accesses frrm test code or the same class are legal. 
  * 
  */
 @Rule(key = UnexpectedAccessCheck.RULE_KEY, // 
@@ -33,11 +33,9 @@ description = UnexpectedAccessCheck.RULE_DESCRIPTION, //
 tags = { Tag.BAD_PRACTICE, Tag.DESIGN })
 public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileScanner {
 
-	//private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	static final String RULE_KEY = "UnexpectedAccessToVisibleForTesting";
 	static final String RULE_NAME = "Unexpected access to @VisibleForTesting";
-	static final String RULE_DESCRIPTION = "You must not access package-private method or field which is annotated by @VisibleForTesting.";
+	static final String RULE_DESCRIPTION = "You must not access package-private method or field which is annotated by <code>@VisibleForTesting</code>.";
 
 	private JavaFileScannerContext context;
 

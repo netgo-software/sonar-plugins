@@ -38,7 +38,7 @@ public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements J
 
 	static final String RULE_KEY = "MisuseOfVisibleForTesting";
 	static final String RULE_NAME = "Misuse of @VisibleForTesting";
-	static final String RULE_DESCRIPTION = "You must use @VisibleForTesting annotation only at package-private methods or package-private fields.";
+	static final String RULE_DESCRIPTION = "You can use <code>@VisibleForTesting</code> annotation only at package-private methods or package-private fields.";
 
 	private JavaFileScannerContext context;
 
