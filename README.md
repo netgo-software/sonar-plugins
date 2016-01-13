@@ -2,7 +2,10 @@
 [![Build Status](https://travis-ci.org/arxes-tolina/sonar-plugins.svg?branch=master)](https://travis-ci.org/arxes-tolina/sonar-plugins)
 
 ## Description
-Contains rules for detecting illegal access and illegal use of guava's `@VisibleForTesting`
+This plugin for [SonarQube](http://www.sonarqube.org/) allows developers to detect common mistakes with [Guava](https://github.com/google/guava)'s `@VisibleForTesting` annotation.
+
+It detects illegal access of annotated members and methods as well as illegal use of guava's `@VisibleForTesting` annotation.
+
 ### Unexpected access to @VisibleForTesting
 Checks if production code accesses members or methods, that are annotated with `@VisibleForTesting`.
 
@@ -51,8 +54,9 @@ _Noncompliant code_
 *   Java 8
 
 ## Installation
-Run `mvn package` and copy the output JAR file into `extensions\plugins` directory inside of SonarQube. 
-Tested with SonarQube 5.2 runnig on Java 8.
+* Download the [latest release](https://github.com/arxes-tolina/sonar-plugins/releases/latest)'s plugin jar and put it into the `extensions\plugins` folder of your SonarQube instance. 
+* Restart SonarQube.
+* Add the rules to your quality profile.
 
 ## Changelog
 
