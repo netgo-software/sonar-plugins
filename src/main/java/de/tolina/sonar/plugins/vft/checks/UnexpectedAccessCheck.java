@@ -10,7 +10,6 @@ import java.util.function.Predicate;
 import javax.annotation.Nonnull;
 
 import org.sonar.check.Rule;
-import org.sonar.java.tag.Tag;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.semantic.Symbol;
@@ -28,9 +27,9 @@ import com.google.common.annotations.VisibleForTesting;
  * 
  */
 @Rule(key = UnexpectedAccessCheck.RULE_KEY, // 
-name = UnexpectedAccessCheck.RULE_NAME, // 
-description = UnexpectedAccessCheck.RULE_DESCRIPTION, //
-tags = { Tag.BAD_PRACTICE, Tag.DESIGN })
+		name = UnexpectedAccessCheck.RULE_NAME, // 
+		description = UnexpectedAccessCheck.RULE_DESCRIPTION, //
+		tags = { "bad-practice", "design" })
 public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileScanner {
 
 	static final String RULE_KEY = "UnexpectedAccessToVisibleForTesting";
@@ -66,7 +65,7 @@ public class UnexpectedAccessCheck extends BaseTreeVisitor implements JavaFileSc
 
 	private void addIssueIfNeeded(final Symbol symbol, final Tree tree) {
 		final Optional<Symbol> symbolWithVisibleForTesting = Optional.ofNullable(symbol).filter(hasVisibleForTestingPredicate);
-		symbolWithVisibleForTesting.ifPresent(s -> context.addIssue(tree, this, String.format(RULE_DESCRIPTION)));
+		symbolWithVisibleForTesting.ifPresent(s -> context.addIssue(tree.firstToken().line(), this, String.format(RULE_DESCRIPTION)));
 	}
 
 }

@@ -11,7 +11,6 @@ import javax.annotation.Nonnull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.check.Rule;
-import org.sonar.java.tag.Tag;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.AnnotationTree;
@@ -25,9 +24,9 @@ import com.google.common.annotations.VisibleForTesting;
  * Checks if the {@link VisibleForTesting} annotation is set only at package-protected fields and mehtods.
  */
 @Rule(key = MisuseOfVisibleForTestingCheck.RULE_KEY, // 
-name = MisuseOfVisibleForTestingCheck.RULE_NAME, // 
-description = MisuseOfVisibleForTestingCheck.RULE_DESCRIPTION, //
-tags = { Tag.BAD_PRACTICE, Tag.DESIGN })
+		name = MisuseOfVisibleForTestingCheck.RULE_NAME, // 
+		description = MisuseOfVisibleForTestingCheck.RULE_DESCRIPTION, //
+		tags = { "bad-practice", "design" })
 public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements JavaFileScanner {
 
 	private static final String VISIBLE_FOR_TESTING_FQN = VisibleForTesting.class.getCanonicalName();
@@ -55,7 +54,7 @@ public class MisuseOfVisibleForTestingCheck extends BaseTreeVisitor implements J
 		if (isVisibleForTesting) {
 			logger.debug("VisibleForTesting found");
 			final Optional<AnnotationTree> vftAtNotPackageProtected = Optional.of(annotationTree).filter(isAtPackageVisibleTree.negate());
-			vftAtNotPackageProtected.ifPresent((tree) -> context.addIssue(tree, this, RULE_DESCRIPTION));
+			vftAtNotPackageProtected.ifPresent((tree) -> context.addIssue(tree.firstToken().line(), this, RULE_DESCRIPTION));
 		}
 		super.visitAnnotation(annotationTree);
 	}

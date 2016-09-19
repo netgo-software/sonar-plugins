@@ -50,7 +50,7 @@ _Noncompliant code_
 	public String foo;
 
 ## Prerequisites
-*   SonarQube 5.1.2+ (maybe below but not tested)
+*   SonarQube 6+ (maybe below but not tested)
 *   Java 8
 
 ## Installation
@@ -59,6 +59,9 @@ _Noncompliant code_
 * Add the rules to your quality profile.
 
 ## Changelog
+
+### 0.0.3
+* SonarQube 6 compatibility
 
 ### 0.0.2
 * fixed some administrative properties in the POM file

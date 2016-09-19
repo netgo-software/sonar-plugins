@@ -27,15 +27,17 @@
 	</issueManagement>
 
 	<scm>
-		<connection>scm:https://github.com/arxes-tolina/sonar-plugins.git</connection>
+		<connection>scm:git:https://github.com/arxes-tolina/sonar-plugins.git</connection>
+		<developerConnection>scm:git:git@github.com:arxes-tolina/sonar-java.git</developerConnection>
 		<url>https://github.com/arxes-tolina/sonar-plugins</url>
 		<tag></tag>
 	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<sonar.java.plugin.version>3.7.1</sonar.java.plugin.version>
-		<sonar.plugin-api.version>5.1</sonar.plugin-api.version>
+		<sonar.java.plugin.version>4.2</sonar.java.plugin.version>
+		<sonar.plugin-api.version>6.0</sonar.plugin-api.version>
+		<sonar.sslr.version>1.21</sonar.sslr.version>
 	</properties>
 
 	<dependencyManagement>
@@ -55,7 +57,12 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.codehaus.sonar</groupId>
+			<groupId>org.sonarsource.java</groupId>
+			<artifactId>java-frontend</artifactId>
+			<version>${sonar.java.plugin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sonarsource.sonarqube</groupId>
 			<artifactId>sonar-plugin-api</artifactId>
 			<version>${sonar.plugin-api.version}</version>
 			<scope>provided</scope>
@@ -73,11 +80,10 @@
 			<version>${sonar.java.plugin.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
-			<groupId>org.codehaus.sonar.sslr</groupId>
+			<groupId>org.sonarsource.sslr</groupId>
 			<artifactId>sslr-testing-harness</artifactId>
-			<version>1.19.2</version>
+			<version>${sonar.sslr.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -123,13 +129,14 @@
 
 		<plugins>
 			<plugin>
-				<groupId>org.codehaus.sonar</groupId>
+				<groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
 				<artifactId>sonar-packaging-maven-plugin</artifactId>
-				<version>1.12.1</version>
+				<version>1.17</version>
 				<extensions>true</extensions>
 				<configuration>
 					<pluginClass>de.tolina.sonar.plugins.TolinaSonarPlugin</pluginClass>
 					<pluginUrl>https://github.com/arxes-tolina/sonar-plugins</pluginUrl>
+					<sonarQubeMinVersion>6.0</sonarQubeMinVersion>
 				</configuration>
 			</plugin>
 			<plugin>
