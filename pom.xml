@@ -35,9 +35,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<sonar.java.plugin.version>4.2</sonar.java.plugin.version>
-		<sonar.plugin-api.version>6.0</sonar.plugin-api.version>
-		<sonar.sslr.version>1.21</sonar.sslr.version>
+		<sonar.java.plugin.version>6.15.1.26025</sonar.java.plugin.version>
+		<sonar.plugin-api.version>8.9.7.52159</sonar.plugin-api.version>
+		<sonar.sslr.version>1.24.0.633</sonar.sslr.version>
 	</properties>
 
 	<dependencyManagement>
@@ -51,6 +51,11 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>jcl-over-slf4j</artifactId>
 				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.platform</groupId>
+				<artifactId>org.eclipse.equinox.preferences</artifactId>
+				<version>3.9.100</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -110,6 +115,18 @@
 			<version>0.9.30</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>29.0-jre</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -131,12 +148,12 @@
 			<plugin>
 				<groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
 				<artifactId>sonar-packaging-maven-plugin</artifactId>
-				<version>1.17</version>
+				<version>1.18.0.372</version>
 				<extensions>true</extensions>
 				<configuration>
 					<pluginClass>de.tolina.sonar.plugins.TolinaSonarPlugin</pluginClass>
 					<pluginUrl>https://github.com/arxes-tolina/sonar-plugins</pluginUrl>
-					<sonarQubeMinVersion>6.0</sonarQubeMinVersion>
+					<sonarQubeMinVersion>8.9</sonarQubeMinVersion>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -157,7 +174,7 @@
 								<artifactItem>
 									<groupId>com.google.guava</groupId>
 									<artifactId>guava</artifactId>
-									<version>18.0</version>
+									<version>29.0-jre</version>
 									<type>jar</type>
 								</artifactItem>
 							</artifactItems>

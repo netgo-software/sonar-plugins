@@ -23,6 +23,6 @@ public class MisuseOfVisibleForTestingCheckTest {
 	@SuppressWarnings("javadoc")
 	@Test
 	public void test() {
-		JavaCheckVerifier.verify("src/test/java/de/tolina/sonar/plugins/vft/checks/MisuseOfVisibleForTestingCheckerTestClass.java", check);
+		JavaCheckVerifier.verify("src/test/java/de/tolina/sonar/plugins/vft/checks/MisuseOfVisibleForTestingCheckerTestClass.java", check, "target/test-jars");
 	}
 }
